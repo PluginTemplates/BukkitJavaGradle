@@ -50,7 +50,6 @@ public final class BukkitJavaGradle extends JavaPlugin {
     public void onEnable() {
         final BukkitCommandManager manager = new BukkitCommandManager(this);
         BukkitJavaGradle.api = new BukkitJavaGradleAPI(this);
-
         this.getServer().getScheduler().runTask(this, () ->
             this.getServer().getScheduler().runTaskAsynchronously(this, () ->
                 BukkitJavaGradle.api.reloadPlugin(true)
@@ -60,12 +59,10 @@ public final class BukkitJavaGradle extends JavaPlugin {
             if (value == null || value.length == 0) {
                 return;
             }
-
-            final String playerName = value[c.getConfigValue("arg", 0)];
-
-            if (c.hasConfig("arg") && Bukkit.getPlayer(playerName) == null) {
+            final String name = value[c.getConfigValue("arg", 0)];
+            if (c.hasConfig("arg") && Bukkit.getPlayer(name) == null) {
                 throw new ConditionFailedException(
-                    BukkitJavaGradle.api.languageFile.errors.player_not_found.build("%player_name%", () -> playerName)
+                    BukkitJavaGradle.api.languageFile.errors.player_not_found.build("%player_name%", () -> name)
                 );
             }
         });
