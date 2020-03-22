@@ -3,6 +3,7 @@ package io.github.plugintemplate.bukkitjavagradle;
 import co.aikar.commands.BukkitCommandManager;
 import co.aikar.commands.ConditionFailedException;
 import io.github.plugintemplate.bukkitjavagradle.commands.BukkitJavaGradleCommand;
+import java.util.Optional;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -16,27 +17,39 @@ public final class BukkitJavaGradle extends JavaPlugin {
 
     @NotNull
     public static BukkitJavaGradle getInstance() {
-        if (BukkitJavaGradle.instance == null) {
-            // TODO Change the BukkitJavaGradle case as you want.
-            throw new IllegalStateException("You cannot be used BukkitJavaGradle plugin before its start!");
-        }
+        return Optional.ofNullable(BukkitJavaGradle.instance).orElseThrow(() ->
+            new IllegalStateException("You cannot be used BukkitJavaGradle plugin before its start!")
+        );
+    }
 
-        return BukkitJavaGradle.instance;
+    private void setInstance(@NotNull final BukkitJavaGradle instance) {
+        if (Optional.ofNullable(BukkitJavaGradle.instance).isPresent()) {
+            throw new IllegalStateException("You can't use #setInstance method twice!");
+        }
+        synchronized (this) {
+            BukkitJavaGradle.instance = instance;
+        }
     }
 
     @NotNull
     public static BukkitJavaGradleAPI getAPI() {
-        if (BukkitJavaGradle.api == null) {
-            // TODO Change the BukkitJavaGradle case as you want.
-            throw new IllegalStateException("You cannot be used BukkitJavaGradle plugin before its start!");
-        }
+        return Optional.ofNullable(BukkitJavaGradle.api).orElseThrow(() ->
+            new IllegalStateException("You cannot be used BukkitJavaGradle plugin before its start!")
+        );
+    }
 
-        return BukkitJavaGradle.api;
+    private void setAPI(@NotNull final BukkitJavaGradleAPI loader) {
+        if (Optional.ofNullable(BukkitJavaGradle.api).isPresent()) {
+            throw new IllegalStateException("You can't use #setAPI method twice!");
+        }
+        synchronized (this) {
+            BukkitJavaGradle.api = loader;
+        }
     }
 
     @Override
     public void onLoad() {
-        BukkitJavaGradle.instance = this;
+        this.setInstance(this);
     }
 
     @Override
@@ -49,10 +62,11 @@ public final class BukkitJavaGradle extends JavaPlugin {
     @Override
     public void onEnable() {
         final BukkitCommandManager manager = new BukkitCommandManager(this);
-        BukkitJavaGradle.api = new BukkitJavaGradleAPI(this);
+        final BukkitJavaGradleAPI api = new BukkitJavaGradleAPI(this);
+        this.setAPI(api);
         this.getServer().getScheduler().runTask(this, () ->
             this.getServer().getScheduler().runTaskAsynchronously(this, () ->
-                BukkitJavaGradle.api.reloadPlugin(true)
+                api.reloadPlugin(true)
             )
         );
         manager.getCommandConditions().addCondition(String[].class, "player", (c, exec, value) -> {
@@ -62,12 +76,12 @@ public final class BukkitJavaGradle extends JavaPlugin {
             final String name = value[c.getConfigValue("arg", 0)];
             if (c.hasConfig("arg") && Bukkit.getPlayer(name) == null) {
                 throw new ConditionFailedException(
-                    BukkitJavaGradle.api.languageFile.errors.player_not_found.build("%player_name%", () -> name)
+                    api.languageFile.errors.player_not_found.build("%player_name%", () -> name)
                 );
             }
         });
         manager.registerCommand(
-            new BukkitJavaGradleCommand(BukkitJavaGradle.api)
+            new BukkitJavaGradleCommand(api)
         );
     }
 
