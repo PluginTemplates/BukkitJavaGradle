@@ -1,4 +1,4 @@
-package com.infumia.bukkitjavagradle;
+package io.github.plugintemplate.bukkitjavagradle;
 
 import org.bukkit.plugin.java.JavaPlugin;
 

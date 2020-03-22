@@ -1,7 +1,0 @@
-name: BukkitJavaGradle
-version: @version@
-main: com.infumia.bukkitjavagradle.BukkitJavaGradle
-api-version: '1.13'
-softdepend: [Vault, LuckPerms, GroupManager, PermissionsEx]
-authors: [portlek]
-description: Plugin Template for Bukkit on Java with Gradle.

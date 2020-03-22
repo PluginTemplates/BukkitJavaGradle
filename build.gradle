@@ -18,21 +18,19 @@ targetCompatibility = '1.8'
 
 repositories {
     mavenCentral()
-    maven {
-        name = 'spigotmc-repo'
-        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
-    }
+    spigot()
+    jitpack()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compileOnly 'org.bukkit:bukkit:1.15.2-R0.1-SNAPSHOT'
+    compileOnly bukkit()
+    compileOnly vault()
+    compileOnly luckPerms()
 }
 
-import org.apache.tools.ant.filters.ReplaceTokens
-
-processResources {
-    from(sourceSets.main.resources.srcDirs) {
-        filter ReplaceTokens, tokens: [version: version]
-    }
+spigot {
+    description = "Plugin Template for Bukkit on Java with Gradle."
+    apiVersion = "1.13"
+    authors = ["portlek"]
+    softDepends = ["Vault", "GroupManager", "LuckPerms", "PermissionsEx"]
 }
