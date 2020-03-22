@@ -85,6 +85,15 @@ spigot {
     apiVersion = "1.13"
     authors = ["portlek"]
     softDepends = ["Vault", "GroupManager", "LuckPerms", "PermissionsEx", "PlaceholderAPI"]
+    commands {
+        bukkitjavagradle {
+            description = 'Main command of the plugin.'
+            permission = 'bukkitjavagradle.command.main'
+            permissionMessage = 'You do not have permission!'
+            usage = '/<command> [help|reload|version]'
+            aliases = ['bjg']
+        }
+    }
     permissions {
         'bukkigjavagradle.*' {
             description = 'Allows you to access to the all plugin.'
