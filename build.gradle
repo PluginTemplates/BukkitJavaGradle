@@ -106,8 +106,8 @@ spigot {
             description = 'It allows you to use to all commands of the plugin.'
             defaults = 'op'
             children = [
-                'bukkitjavagradle.command.help': true,
-                'bukkitjavagradle.command.reload': true,
+                'bukkitjavagradle.command.help'   : true,
+                'bukkitjavagradle.command.reload' : true,
                 'bukkitjavagradle.command.version': true
             ]
         }
