@@ -85,9 +85,7 @@ public final class ConfigFile extends BukkitManaged {
         } else {
             database = new SQLite(BukkitJavaGradle.getInstance(), "bukkitjavagradle.db");
         }
-        return new SQLBasic(
-            database
-        );
+        return new SQLBasic(database);
     }
 
     private boolean isMySQL() {
