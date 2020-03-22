@@ -87,56 +87,40 @@ spigot {
     softDepends = ["Vault", "GroupManager", "LuckPerms", "PermissionsEx", "PlaceholderAPI"]
     permissions {
         'bukkigjavagradle.*' {
-            description = "Allows you to access to the all plugin."
+            description = 'Allows you to access to the all plugin.'
             defaults = 'op'
             children = [
-                'exampleplugin.command.*': true
+                'bukkigjavagradle.command.*': true
             ]
         }
+        'bukkitjavagradle.command.*' {
+            description = 'It allows you to use to all commands of the plugin.'
+            defaults = 'op'
+            children = [
+                'bukkitjavagradle.command.help': true,
+                'bukkitjavagradle.command.reload': true,
+                'bukkitjavagradle.command.version': true
+            ]
+        }
+        'bukkitjavagradle.version' {
+            description = 'It allows you to notify if there is a new update for the plugin on join.'
+            defaults = 'op'
+        }
+        'bukkitjavagradle.command.main' {
+            description = 'It allows you to use `/bukkitjavagradle` command.'
+            defaults = 'true'
+        }
+        'bukkitjavagradle.command.help' {
+            description = 'It allows you to use to `/bukkitjavagralde help` command.'
+            defaults = 'true'
+        }
+        'bukkitjavagradle.command.reload' {
+            description = 'It allows you to use to `/bukkitjavagradle reload` command.'
+            defaults = 'op'
+        }
+        'bukkitjavagradle.command.version' {
+            description = 'It allows you to use to `/bukkitjavagradle version` command.'
+            defaults = 'op'
+        }
     }
-    /**
-     * @Permissions ( {
-     * @Permission(
-     *name = "exampleplugin.*" ,
-     *desc = "Allowsyoutoaccesstotheallplugin." ,
-     *defaultValue =PermissionDefault.OP,
-     *children = {* @ChildPermission(name = "exampleplugin.version" ) ,
-     * @ChildPermission (name = "exampleplugin.command.*" )
-     *}*     ) ,
-     * @Permission (
-     *name = "exampleplugin.command.*" ,
-     *desc = "Itallowsyoutousetoallcommandsoftheplugin." ,
-     *defaultValue =PermissionDefault.OP,
-     *children = {* @ChildPermission (name = "exampleplugin.command.main" ) ,
-     * @ChildPermission (name = "exampleplugin.command.help" ) ,
-     * @ChildPermis sion(name = "exampleplugin.command.reload" ) ,
-     * @ChildPerm ission(name = "exampleplugin.command.version" )
-     *}*     ),
-     * @Permission (
-     *name = "exampleplugin.version" ,
-     *desc = "Itallowsyoutonotifyifthereisnewupdarthepluginonjoin." ,
-     *defaultValue =PermissionDefault.OP
-     * ) ,
-     * @Permission (
-     *name = "exampleplugin.command.main" ,
-     *desc = "Itallowsyoutousetompleplugincommand." ,
-     *defaultValue =PermissionDefault.TRUE
-     * ) ,
-     * @Permission (
-     *name = "exampleplugin.command.help" ,
-     *desc = "Itallowsyoutouseto /exaluginhelpcommand." ,
-     *defaultValue =PermissionDefault.TRUE
-     * ) ,
-     * @Permission (
-     *name = "exampleplugin.command.reload" ,
-     *desc = "Itallowsyoutouseto /exaluginreloadcommand." ,
-     *defaultValue =PermissionDefault.OP
-     * ) ,
-     * @Permission (
-     *name = "exampleplugin.command.version" ,
-     *desc = "Itallowsyoutouseto /exaplepluginversioncommand." ,
-     *defaultValue =PermissionDefault.OP
-     * )
-     *})
-     */
 }
