@@ -86,7 +86,13 @@ spigot {
     authors = ["portlek"]
     softDepends = ["Vault", "GroupManager", "LuckPerms", "PermissionsEx", "PlaceholderAPI"]
     permissions {
-
+        'bukkigjavagradle.*' {
+            description = "Allows you to access to the all plugin."
+            defaults = 'op'
+            children = [
+                'exampleplugin.command.*': true
+            ]
+        }
     }
     /**
      * @Permissions ( {
