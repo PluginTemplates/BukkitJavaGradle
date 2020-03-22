@@ -55,7 +55,7 @@ public final class ConfigFile extends BukkitManaged {
 
     // TODO: Change the plugin prefix as you want.
     @Value
-    public Replaceable<String> plugin_prefix = Replaceable.of("&6[&eExamplePlugin&6]")
+    public Replaceable<String> plugin_prefix = Replaceable.of("&6[&eBukkitJavaGradle&6]")
         .map(ColorUtil::colored);
 
     @Value
@@ -157,22 +157,6 @@ public final class ConfigFile extends BukkitManaged {
             });
     }
 
-    private void hookWithTry(@NotNull final String className, final boolean force, @NotNull final Hook hook, @NotNull final String path,
-                             @NotNull final Runnable succeed, @NotNull final Runnable failed) {
-        try {
-            Class.forName(className);
-            this.hookLittle(
-                force,
-                hook,
-                path,
-                succeed,
-                failed
-            );
-        } catch (final Exception ignored) {
-            // ignored
-        }
-    }
-
     private void hookLittle(final boolean force, @NotNull final Hook hook, @NotNull final String path, @NotNull final Runnable succeed,
                             @NotNull final Runnable failed) {
         this.hookLittle(force, hook, path, () -> true, succeed, failed);
@@ -207,7 +191,7 @@ public final class ConfigFile extends BukkitManaged {
         public final ConfigFile.Saving.MySQL mysql = new ConfigFile.Saving.MySQL();
 
         @Value
-        private final String storage_type = "sqlite";
+        public String storage_type = "sqlite";
 
         @Value
         public boolean save_when_plugin_disable = true;
@@ -222,19 +206,19 @@ public final class ConfigFile extends BukkitManaged {
         public static final class MySQL {
 
             @Value
-            private final String host = "localhost";
+            public String host = "localhost";
 
             @Value
-            private final int port = 3306;
+            public int port = 3306;
 
             @Value
-            private final String database = "database";
+            public String database = "database";
 
             @Value
-            private final String username = "username";
+            public String username = "username";
 
             @Value
-            private final String password = "password";
+            public String password = "password";
 
         }
 
@@ -247,19 +231,19 @@ public final class ConfigFile extends BukkitManaged {
         public boolean auto_detect = true;
 
         @Value
-        private boolean PlaceholderAPI;
+        public boolean PlaceholderAPI = false;
 
         @Value
-        private boolean GroupManager;
+        public boolean GroupManager = false;
 
         @Value
-        private boolean LuckPerms;
+        public boolean LuckPerms = false;
 
         @Value
-        private boolean PermissionsEX;
+        public boolean PermissionsEX = false;
 
         @Value
-        private boolean Vault;
+        public boolean Vault = false;
 
     }
 
