@@ -74,7 +74,6 @@ public final class ConfigFile extends BukkitManaged {
     @NotNull
     public SQL createSQL() {
         final Database database;
-
         if (this.isMySQL()) {
             database = new MySQL(
                 this.saving.mysql.host,
@@ -86,7 +85,6 @@ public final class ConfigFile extends BukkitManaged {
         } else {
             database = new SQLite(BukkitJavaGradle.getInstance(), "bukkitjavagradle.db");
         }
-
         return new SQLBasic(
             database
         );
