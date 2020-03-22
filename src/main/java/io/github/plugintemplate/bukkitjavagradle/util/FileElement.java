@@ -112,6 +112,7 @@ public final class FileElement {
 
     // TODO Don't forget the registering that provider into a file class in #load() method.
     public static class Provider implements Provided<FileElement> {
+
         @Override
         public void set(@NotNull final FileElement fileElement, @NotNull final Managed managed, @NotNull final String s) {
             final BukkitManaged bukkitManaged = (BukkitManaged) managed;
