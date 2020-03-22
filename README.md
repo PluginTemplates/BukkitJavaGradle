@@ -1,2 +1,2 @@
 # BukkitJavaGradle
-Plugin templates for Bukkit on Java with Gradle.
+Plugin template for Bukkit on Java with Gradle.
