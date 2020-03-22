@@ -75,9 +75,9 @@ shadowJar {
     relocate('co.aikar.commands', this.group + ".bukkitjavagradle.commands")
     relocate('io.github.portlek.configs', this.group + ".bukkitjavagradle.file")
     minimize()
-    baseName = this.name
-    classifier ''
-    archiveVersion = ''
+    setArchivesBaseName(this.name)
+    archiveClassifier.set("")
+    archiveVersion.set("")
 }
 
 spigot {
@@ -89,51 +89,48 @@ spigot {
 
     }
     /**
-     * @Permissions ({
-     *     @Permission(
-     *         name = "exampleplugin.*",
-     *         desc = "Allows you to access to the all plugin.",
-     *         defaultValue = PermissionDefault.OP,
-     *         children = {* @Ch ildPermission(name = "exampleplugin.version"),
-     *              @ChildPermission(name = "exampleplugin.command.*")
-     *         }
-     *     ) ,
-     *     @Permission(
-     *         name = "exampleplugin.command.*",
-     *         desc = "It allows you to use to all commands of the plugin.",
-     *         defaultValue = PermissionDefault.OP,
-     *         child ren = {
-     *             @ChildPermission(name = "exampleplu gin.command.main"),
-     *             @ChildPermission (name = "exampleplugin.command.help"),
-     *              @ChildPermis sion(name = "exampleplugin.command.reload"),
-     *              @ChildPerm ission(name = "exampleplugin.command.version")
-     *         }
-     *     ),
-     *     @Permission(
-     *         name = "exampleplugin.version",
-     *         desc = "It allows you to notify if there is new upda r the plugi n on join.",
-     *         defaultValue = PermissionDefault.OP
-     *     ),
-     *     @Permission(
-     *         name = "exampleplugin.command.main",
-     *         desc = "It allows you to use to mpleplugin  command.",
-     *         defaultValue = PermissionDefault.TRUE
-     *     ),
-     *     @Permission(
-     *         name = "exampleplugin.command.help",
-     *         desc = "It allows you to use to /exa lugin help  command.",
-     *         defaultValue = PermissionDefault.TRUE
-     *     ),
-     *     @Permission(
-     *         name = "exampleplugin.command.reload",
-     *         desc = "It allows you to use to /exa lugin reloa d command.",
-     *         defaultValue = PermissionDefault.OP
-     *     ),
-     *     @Permission(
-     *         name = "exampleplugin.command.version",
-     *         desc = "It allows you to use to /exapleplugin version command.",
-     *         defaultValue = PermissionDefault.OP
-     *     )
-     * })
+     * @Permissions ( {
+     * @Permission(
+     *name = "exampleplugin.*" ,
+     *desc = "Allowsyoutoaccesstotheallplugin." ,
+     *defaultValue =PermissionDefault.OP,
+     *children = {* @ChildPermission(name = "exampleplugin.version" ) ,
+     * @ChildPermission (name = "exampleplugin.command.*" )
+     *}*     ) ,
+     * @Permission (
+     *name = "exampleplugin.command.*" ,
+     *desc = "Itallowsyoutousetoallcommandsoftheplugin." ,
+     *defaultValue =PermissionDefault.OP,
+     *children = {* @ChildPermission (name = "exampleplugin.command.main" ) ,
+     * @ChildPermission (name = "exampleplugin.command.help" ) ,
+     * @ChildPermis sion(name = "exampleplugin.command.reload" ) ,
+     * @ChildPerm ission(name = "exampleplugin.command.version" )
+     *}*     ),
+     * @Permission (
+     *name = "exampleplugin.version" ,
+     *desc = "Itallowsyoutonotifyifthereisnewupdarthepluginonjoin." ,
+     *defaultValue =PermissionDefault.OP
+     * ) ,
+     * @Permission (
+     *name = "exampleplugin.command.main" ,
+     *desc = "Itallowsyoutousetompleplugincommand." ,
+     *defaultValue =PermissionDefault.TRUE
+     * ) ,
+     * @Permission (
+     *name = "exampleplugin.command.help" ,
+     *desc = "Itallowsyoutouseto /exaluginhelpcommand." ,
+     *defaultValue =PermissionDefault.TRUE
+     * ) ,
+     * @Permission (
+     *name = "exampleplugin.command.reload" ,
+     *desc = "Itallowsyoutouseto /exaluginreloadcommand." ,
+     *defaultValue =PermissionDefault.OP
+     * ) ,
+     * @Permission (
+     *name = "exampleplugin.command.version" ,
+     *desc = "Itallowsyoutouseto /exaplepluginversioncommand." ,
+     *defaultValue =PermissionDefault.OP
+     * )
+     *})
      */
 }
