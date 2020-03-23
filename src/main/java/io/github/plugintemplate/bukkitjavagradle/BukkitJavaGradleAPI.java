@@ -1,5 +1,6 @@
 package io.github.plugintemplate.bukkitjavagradle;
 
+import fr.minuskube.inv.InventoryManager;
 import io.github.plugintemplate.bukkitjavagradle.file.ConfigFile;
 import io.github.plugintemplate.bukkitjavagradle.file.LanguageFile;
 import io.github.plugintemplate.bukkitjavagradle.util.ListenerBasic;
@@ -11,6 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 // TODO Change the class name as you want.
 public final class BukkitJavaGradleAPI {
+
+    @NotNull
+    public final InventoryManager inventoryManager;
 
     @NotNull
     public final BukkitJavaGradle bukkitJavaGradle;
@@ -25,6 +29,7 @@ public final class BukkitJavaGradleAPI {
     public SQL sql;
 
     public BukkitJavaGradleAPI(@NotNull final BukkitJavaGradle bukkitJavaGradle) {
+        this.inventoryManager = new InventoryManager(bukkitJavaGradle);
         this.bukkitJavaGradle = bukkitJavaGradle;
         this.configFile = new ConfigFile();
         this.languageFile = new LanguageFile(this.configFile);
@@ -36,6 +41,7 @@ public final class BukkitJavaGradleAPI {
         this.configFile.load();
 
         if (first) {
+            this.inventoryManager.init();
             new ListenerBasic<>(
                 PlayerJoinEvent.class,
                 event -> event.getPlayer().hasPermission("bukkitjavagradle.version"),
