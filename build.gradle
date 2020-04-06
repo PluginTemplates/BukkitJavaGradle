@@ -1,20 +1,9 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven {
-            url 'https://plugins.gradle.org/m2/'
-        }
-    }
-    dependencies {
-        classpath 'kr.entree:spigradle:1.2.2'
-        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
-    }
+plugins {
+    id 'java'
+    id 'maven'
+    id 'kr.entree.spigradle' version '1.2.4'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
 }
-
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'kr.entree.spigradle'
-apply plugin: "com.github.johnrengelman.shadow"
 
 group = "io.github.plugintemplate"
 version = "1.0"
