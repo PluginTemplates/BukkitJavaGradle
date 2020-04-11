@@ -38,13 +38,7 @@ dependencies {
     implementation("io.github.portlek:database:1.0")
     implementation("io.github.portlek:configs-bukkit:1.0")
     implementation("com.github.cryptomorin:XSeries:5.3.1")
-
-    // Inventory Library is from local maven repository(for now)
-    // Visit https://github.com/MinusKube/SmartInvs/tree/1.3.0
-    // Clone it and run `gradlew clean build` command without
-    // `signing` and `uploadArchives` tasks on the build.gradle
-    // If 1.3.0 was released you don't have to do that.
-    implementation("fr.minuskube.inv:smart-invs:1.3.0")
+    implementation("io.github.portlek:SmartInventory:1.3.0")
 
     // Other Stuffs
     compileOnly("org.jetbrains:annotations:19.0.0")
