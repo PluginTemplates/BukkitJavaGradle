@@ -1,11 +1,11 @@
 package io.github.plugintemplate.bukkitjavagradle;
 
-import fr.minuskube.inv.InventoryManager;
 import io.github.plugintemplate.bukkitjavagradle.file.ConfigFile;
 import io.github.plugintemplate.bukkitjavagradle.file.LanguageFile;
 import io.github.plugintemplate.bukkitjavagradle.util.ListenerBasic;
 import io.github.plugintemplate.bukkitjavagradle.util.UpdateChecker;
 import io.github.portlek.database.SQL;
+import io.github.portlek.smartinventory.InventoryManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;

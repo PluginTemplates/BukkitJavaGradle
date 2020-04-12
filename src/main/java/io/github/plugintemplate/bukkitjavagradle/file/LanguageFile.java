@@ -1,8 +1,9 @@
 package io.github.plugintemplate.bukkitjavagradle.file;
 
+import io.github.portlek.bukkititembuilder.util.ColorUtil;
 import io.github.portlek.configs.BukkitLinkedManaged;
+import io.github.portlek.configs.BukkitSection;
 import io.github.portlek.configs.annotations.*;
-import io.github.portlek.configs.util.ColorUtil;
 import io.github.portlek.configs.util.MapEntry;
 import io.github.portlek.configs.util.Replaceable;
 import java.util.HashMap;
@@ -58,7 +59,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
     }
 
     @Section(path = "error")
-    public class Error {
+    public class Error extends BukkitSection {
 
         @Value
         public Replaceable<String> player_not_found = LanguageFile.this.match(s -> {
@@ -76,7 +77,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
     }
 
     @Section(path = "general")
-    public class General {
+    public class General extends BukkitSection {
 
         @Value
         public Replaceable<String> reload_complete = LanguageFile.this.match(s -> {

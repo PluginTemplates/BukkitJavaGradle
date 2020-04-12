@@ -1,10 +1,10 @@
 package io.github.plugintemplate.bukkitjavagradle.util;
 
-import fr.minuskube.inv.ClickableItem;
-import fr.minuskube.inv.content.InventoryContents;
 import io.github.portlek.configs.BukkitManaged;
-import io.github.portlek.configs.Managed;
-import io.github.portlek.configs.Provided;
+import io.github.portlek.configs.CfgSection;
+import io.github.portlek.configs.util.Provided;
+import io.github.portlek.smartinventory.ClickableItem;
+import io.github.portlek.smartinventory.content.InventoryContents;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -114,25 +114,24 @@ public final class FileElement {
     public static class Provider implements Provided<FileElement> {
 
         @Override
-        public void set(@NotNull final FileElement fileElement, @NotNull final Managed managed, @NotNull final String s) {
-            final BukkitManaged bukkitManaged = (BukkitManaged) managed;
-            bukkitManaged.set(s + ".row", fileElement.row);
-            bukkitManaged.set(s + ".column", fileElement.column);
-            bukkitManaged.setItemStack(s, fileElement.itemStack);
+        public void set(@NotNull final FileElement fileElement, @NotNull final CfgSection section, @NotNull final String s) {
+            section.set(s + ".row", fileElement.row);
+            section.set(s + ".column", fileElement.column);
+            ((BukkitManaged) section).setItemStack(s, fileElement.itemStack);
         }
 
         @NotNull
         @Override
-        public Optional<FileElement> get(@NotNull final Managed managed, @NotNull final String s) {
-            if (!s.contains("element") || !managed.getSection(s).isPresent()) {
+        public Optional<FileElement> get(@NotNull final CfgSection section, @NotNull final String s) {
+            if (!s.contains("element") || !section.getSection(s).isPresent()) {
                 return Optional.empty();
             }
-            final BukkitManaged bukkitManaged = (BukkitManaged) managed;
+            final BukkitManaged bukkitManaged = (BukkitManaged) section;
             return bukkitManaged.getItemStack(s).map(stack ->
                 new FileElement(
                     stack,
-                    bukkitManaged.getInt(s + ".row"),
-                    bukkitManaged.getInt(s + ".column")
+                    section.getInt(s + ".row"),
+                    section.getInt(s + ".column")
                 )
             );
         }

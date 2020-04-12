@@ -4,12 +4,13 @@ import io.github.plugintemplate.bukkitjavagradle.BukkitJavaGradle;
 import io.github.plugintemplate.bukkitjavagradle.Hook;
 import io.github.plugintemplate.bukkitjavagradle.Wrapped;
 import io.github.plugintemplate.bukkitjavagradle.hooks.*;
+import io.github.portlek.bukkititembuilder.util.ColorUtil;
 import io.github.portlek.configs.BukkitManaged;
+import io.github.portlek.configs.BukkitSection;
 import io.github.portlek.configs.annotations.Config;
 import io.github.portlek.configs.annotations.Instance;
 import io.github.portlek.configs.annotations.Section;
 import io.github.portlek.configs.annotations.Value;
-import io.github.portlek.configs.util.ColorUtil;
 import io.github.portlek.configs.util.Replaceable;
 import io.github.portlek.database.Database;
 import io.github.portlek.database.SQL;
@@ -181,7 +182,7 @@ public final class ConfigFile extends BukkitManaged {
     }
 
     @Section(path = "saving")
-    public static final class Saving {
+    public static final class Saving extends BukkitSection {
 
         @Instance
         public final ConfigFile.Saving.MySQL mysql = new ConfigFile.Saving.MySQL();
@@ -221,7 +222,7 @@ public final class ConfigFile extends BukkitManaged {
     }
 
     @Section(path = "hooks")
-    public static final class Hooks {
+    public static final class Hooks extends BukkitSection {
 
         @Value
         public boolean auto_detect = true;
