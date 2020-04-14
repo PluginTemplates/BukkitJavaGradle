@@ -1,6 +1,6 @@
 version: 1
 update_configs:
-  - package_manager: "javascript"
+  - package_manager: "java"
     directory: "/"
     update_schedule: "daily"
     automerged_updates:
