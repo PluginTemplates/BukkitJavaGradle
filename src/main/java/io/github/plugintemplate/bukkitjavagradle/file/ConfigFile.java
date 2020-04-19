@@ -200,7 +200,7 @@ public final class ConfigFile extends BukkitManaged {
         public int auto_save_time = 60;
 
         @Section(path = "mysql")
-        public static final class MySQL {
+        public static final class MySQL extends BukkitSection {
 
             @Value
             public String host = "localhost";
