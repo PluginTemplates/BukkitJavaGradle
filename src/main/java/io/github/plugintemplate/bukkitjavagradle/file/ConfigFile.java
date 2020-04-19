@@ -89,18 +89,18 @@ public final class ConfigFile extends BukkitManaged {
         return new SQLBasic(database);
     }
 
-    private boolean isMySQL() {
-        return this.saving.storage_type.equalsIgnoreCase("mysql") ||
-            this.saving.storage_type.equalsIgnoreCase("remote") ||
-            this.saving.storage_type.equalsIgnoreCase("net");
-    }
-
     @NotNull
     @SuppressWarnings("unchecked")
     public <T extends Wrapped> Optional<T> getWrapped(@NotNull final String wrappedId) {
         return Optional.ofNullable(
             (T) this.wrapped.get(wrappedId)
         );
+    }
+
+    private boolean isMySQL() {
+        return this.saving.storage_type.equalsIgnoreCase("mysql") ||
+            this.saving.storage_type.equalsIgnoreCase("remote") ||
+            this.saving.storage_type.equalsIgnoreCase("net");
     }
 
     private void loadWrapped() {
