@@ -37,7 +37,7 @@ dependencies {
     implementation("co.aikar:acf-bukkit:0.5.0-SNAPSHOT")
     implementation("io.github.portlek:database:1.0")
     implementation("io.github.portlek:configs-bukkit:1.7.1")
-    implementation("io.github.portlek:SmartInventory:2.0")
+    implementation("io.github.portlek:SmartInventory:2.1")
 
     // Other Stuffs
     compileOnly("org.jetbrains:annotations:19.0.0")
