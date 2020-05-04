@@ -46,7 +46,7 @@ dependencies {
     compileOnly bukkit()
 
     // Hooks
-    compileOnly("me.clip:placeholderapi:2.10.5")
+    compileOnly("me.clip:placeholderapi:2.10.6")
     compileOnly("org.anjocaido:groupmanagerx:2.2-SNAPSHOT")
     compileOnly("ru.tehkode:PermissionsEx:1.23.5-SNAPSHOT")
     compileOnly vault()
