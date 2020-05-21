@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 @Config(
     name = "config",
     // TODO: Change the plugin data folder as you want.
-    location = "%basedir%/BukkitJavaMaven"
+    location = "%basedir%/BukkitJavaGradle"
 )
 public final class ConfigFile extends BukkitManaged {
 
