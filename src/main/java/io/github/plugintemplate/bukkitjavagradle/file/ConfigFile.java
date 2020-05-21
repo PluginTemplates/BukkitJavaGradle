@@ -1,8 +1,6 @@
 package io.github.plugintemplate.bukkitjavagradle.file;
 
 import io.github.plugintemplate.bukkitjavagradle.BukkitJavaGradle;
-import io.github.plugintemplate.bukkitjavagradle.hooks.Hook;
-import io.github.plugintemplate.bukkitjavagradle.hooks.Wrapped;
 import io.github.plugintemplate.bukkitjavagradle.hooks.*;
 import io.github.portlek.bukkititembuilder.util.ColorUtil;
 import io.github.portlek.configs.annotations.Config;
@@ -32,8 +30,6 @@ import org.jetbrains.annotations.NotNull;
 public final class ConfigFile extends BukkitManaged {
 
     // Hook Paths
-    private static final String HOOKS_PATH = "hooks.";
-
     private static final String PLACEHOLDER_API = "PlaceholderAPI";
 
     private static final String GROUP_MANAGER = "GroupManager";
@@ -66,8 +62,7 @@ public final class ConfigFile extends BukkitManaged {
     public boolean check_for_update = true;
 
     @Override
-    public void load() {
-        super.load();
+    public void onLoad() {
         this.loadWrapped();
         this.setAutoSave(true);
     }
@@ -105,67 +100,68 @@ public final class ConfigFile extends BukkitManaged {
         this.hookLittle(this.hooks.LuckPerms, new LuckPermsHook(), ConfigFile.LUCK_PERMS,
             () -> {
                 this.hooks.LuckPerms = true;
-                this.set(ConfigFile.HOOKS_PATH + ConfigFile.LUCK_PERMS, true);
+                this.hooks.set(ConfigFile.LUCK_PERMS, true);
             },
             () -> {
                 this.hooks.LuckPerms = false;
-                this.set(ConfigFile.HOOKS_PATH + ConfigFile.LUCK_PERMS, false);
+                this.hooks.set(ConfigFile.LUCK_PERMS, false);
             });
 
         this.hookLittle(this.hooks.PlaceholderAPI, new PlaceholderAPIHook(), ConfigFile.PLACEHOLDER_API,
             () -> {
                 this.hooks.PlaceholderAPI = true;
-                this.set(ConfigFile.HOOKS_PATH + ConfigFile.PLACEHOLDER_API, true);
+                this.hooks.set(ConfigFile.PLACEHOLDER_API, true);
             },
             () -> {
                 this.hooks.PlaceholderAPI = false;
-                this.set(ConfigFile.HOOKS_PATH + ConfigFile.PLACEHOLDER_API, false);
+                this.hooks.set(ConfigFile.PLACEHOLDER_API, false);
             });
         this.hookLittle(this.hooks.GroupManager, new GroupManagerHook(), ConfigFile.GROUP_MANAGER, () ->
                 !this.wrapped.containsKey(ConfigFile.PERMISSIONS_EX) && !this.wrapped.containsKey(ConfigFile.LUCK_PERMS),
             () -> {
                 this.hooks.GroupManager = true;
-                this.set(ConfigFile.HOOKS_PATH + ConfigFile.GROUP_MANAGER, true);
+                this.hooks.set(ConfigFile.GROUP_MANAGER, true);
             },
             () -> {
                 this.hooks.GroupManager = false;
-                this.set(ConfigFile.HOOKS_PATH + ConfigFile.GROUP_MANAGER, false);
+                this.hooks.set(ConfigFile.GROUP_MANAGER, false);
             });
         this.hookLittle(this.hooks.PermissionsEX, new PermissionsExHook(), ConfigFile.PERMISSIONS_EX, () ->
                 !this.wrapped.containsKey(ConfigFile.GROUP_MANAGER) && !this.wrapped.containsKey(ConfigFile.LUCK_PERMS),
             () -> {
                 this.hooks.PermissionsEX = true;
-                this.set(ConfigFile.HOOKS_PATH + ConfigFile.PERMISSIONS_EX, true);
+                this.hooks.set(ConfigFile.PERMISSIONS_EX, true);
             },
             () -> {
                 this.hooks.PermissionsEX = false;
-                this.set(ConfigFile.HOOKS_PATH + ConfigFile.PERMISSIONS_EX, false);
+                this.hooks.set(ConfigFile.PERMISSIONS_EX, false);
             });
         this.hookLittle(this.hooks.Vault, new VaultHook(), ConfigFile.VAULT,
             () -> {
                 this.hooks.Vault = true;
-                this.set(ConfigFile.HOOKS_PATH + ConfigFile.VAULT, true);
+                this.hooks.set(ConfigFile.VAULT, true);
             },
             () -> {
                 this.hooks.Vault = false;
-                this.set(ConfigFile.HOOKS_PATH + ConfigFile.VAULT, true);
+                this.hooks.set(ConfigFile.VAULT, true);
             });
     }
 
-    private void hookLittle(final boolean force, @NotNull final Hook hook, @NotNull final String path, @NotNull final Runnable succeed,
-                            @NotNull final Runnable failed) {
+    private void hookLittle(final boolean force, @NotNull final Hook hook, @NotNull final String path,
+                            @NotNull final Runnable succeed, @NotNull final Runnable failed) {
         this.hookLittle(force, hook, path, () -> true, succeed, failed);
     }
 
     private void hookLittle(final boolean force, @NotNull final Hook hook, @NotNull final String path,
-                            @NotNull final BooleanSupplier supplier, @NotNull final Runnable succeed, @NotNull final Runnable failed) {
+                            @NotNull final BooleanSupplier supplier, @NotNull final Runnable succeed,
+                            @NotNull final Runnable failed) {
         if ((this.hooks.auto_detect || force) && hook.initiate() && supplier.getAsBoolean()) {
             this.wrapped.put(path, hook.create());
             this.sendHookNotify(path);
-            this.set(ConfigFile.HOOKS_PATH + path, true);
+            this.hooks.set(path, true);
             succeed.run();
         } else {
-            this.set(ConfigFile.HOOKS_PATH + path, false);
+            this.hooks.set(path, false);
             failed.run();
         }
     }
@@ -174,9 +170,7 @@ public final class ConfigFile extends BukkitManaged {
         Bukkit.getConsoleSender().sendMessage(
             // TODO Change the message as you want.
             ColorUtil.colored(
-                this.plugin_prefix.build() + " &r>> &a" + path + " is hooking"
-            )
-        );
+                this.plugin_prefix.build() + " &r>> &a" + path + " is hooking"));
     }
 
     @Section(path = "saving")
