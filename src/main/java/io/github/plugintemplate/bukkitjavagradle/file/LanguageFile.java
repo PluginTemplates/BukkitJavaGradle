@@ -105,6 +105,13 @@ public final class LanguageFile extends BukkitLinkedManaged {
                         .replaces("%player%")
                         .replace(LanguageFile.this.getPrefix()));
             }
+            if ("tr".equals(s)) {
+                return Optional.of(
+                    Replaceable.from("%prefix% &cOyuncu bulunamadı! (%player%)")
+                        .map(ColorUtil::colored)
+                        .replaces("%player%")
+                        .replace(LanguageFile.this.getPrefix()));
+            }
             return Optional.empty();
         });
 
@@ -123,6 +130,14 @@ public final class LanguageFile extends BukkitLinkedManaged {
                         .replaces("%ms%")
                 );
             }
+            if ("tr".equals(s)) {
+                return Optional.of(
+                    Replaceable.from("%prefix% &aYeniden yükleme tamamlandı! &7Took (%ms%ms)")
+                        .map(ColorUtil::colored)
+                        .replace(LanguageFile.this.getPrefix())
+                        .replaces("%ms%")
+                );
+            }
             return Optional.empty();
         });
 
@@ -136,6 +151,14 @@ public final class LanguageFile extends BukkitLinkedManaged {
                         .replace(LanguageFile.this.getPrefix())
                 );
             }
+            if ("tr".equals(s)) {
+                return Optional.of(
+                    Replaceable.from("%prefix% &eYeni sürüm bulundu (v%version%)")
+                        .map(ColorUtil::colored)
+                        .replaces("%version%")
+                        .replace(LanguageFile.this.getPrefix())
+                );
+            }
             return Optional.empty();
         });
 
@@ -143,7 +166,15 @@ public final class LanguageFile extends BukkitLinkedManaged {
         public Replaceable<String> latest_version = LanguageFile.this.match(s -> {
             if ("en".equals(s)) {
                 return Optional.of(
-                    Replaceable.from("%prefix% &aYou''re using the latest version (v%version%)")
+                    Replaceable.from("%prefix% &aYou're using the latest version (v%version%)")
+                        .map(ColorUtil::colored)
+                        .replaces("%version%")
+                        .replace(LanguageFile.this.getPrefix())
+                );
+            }
+            if ("tr".equals(s)) {
+                return Optional.of(
+                    Replaceable.from("%prefix% &aSon sürümü kullanıyorsunuz (v%version%)")
                         .map(ColorUtil::colored)
                         .replaces("%version%")
                         .replace(LanguageFile.this.getPrefix())
