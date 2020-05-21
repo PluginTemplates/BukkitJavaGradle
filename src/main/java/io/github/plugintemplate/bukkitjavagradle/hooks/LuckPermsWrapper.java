@@ -1,6 +1,5 @@
 package io.github.plugintemplate.bukkitjavagradle.hooks;
 
-import io.github.plugintemplate.bukkitjavagradle.Wrapped;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.model.user.User;
 import org.bukkit.entity.Player;

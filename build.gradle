@@ -36,11 +36,13 @@ dependencies {
     // Tools
     implementation("co.aikar:acf-bukkit:0.5.0-SNAPSHOT")
     implementation("io.github.portlek:database:1.0")
-    implementation("io.github.portlek:configs-bukkit:3.0")
+    implementation("io.github.portlek:configs-bukkit:3.1.1")
     implementation("io.github.portlek:SmartInventory:2.3")
     
     // Other Stuffs
     compileOnly("org.jetbrains:annotations:19.0.0")
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
     // Main
     compileOnly bukkit()
@@ -90,7 +92,8 @@ spigot {
             children = [
                 'bukkitjavagradle.command.help'   : true,
                 'bukkitjavagradle.command.reload' : true,
-                'bukkitjavagradle.command.version': true
+                'bukkitjavagradle.command.version': true,
+                'bukkitjavagradle.command.message': true
             ]
         }
         'bukkitjavagradle.version' {
@@ -112,6 +115,10 @@ spigot {
         'bukkitjavagradle.command.version' {
             description = 'It allows you to use to `/bukkitjavagradle version` command.'
             defaults = 'op'
+        }
+        'bukkitjavagradle.command.message' {
+            description = 'It allows you to use to `/bukkitjavagradle message` command.'
+            defaults = 'true'
         }
     }
 }

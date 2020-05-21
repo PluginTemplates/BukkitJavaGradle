@@ -1,16 +1,16 @@
 package io.github.plugintemplate.bukkitjavagradle.file;
 
 import io.github.plugintemplate.bukkitjavagradle.BukkitJavaGradle;
-import io.github.plugintemplate.bukkitjavagradle.Hook;
-import io.github.plugintemplate.bukkitjavagradle.Wrapped;
+import io.github.plugintemplate.bukkitjavagradle.hooks.Hook;
+import io.github.plugintemplate.bukkitjavagradle.hooks.Wrapped;
 import io.github.plugintemplate.bukkitjavagradle.hooks.*;
 import io.github.portlek.bukkititembuilder.util.ColorUtil;
-import io.github.portlek.configs.BukkitManaged;
-import io.github.portlek.configs.BukkitSection;
 import io.github.portlek.configs.annotations.Config;
 import io.github.portlek.configs.annotations.Instance;
+import io.github.portlek.configs.annotations.Property;
 import io.github.portlek.configs.annotations.Section;
-import io.github.portlek.configs.annotations.Value;
+import io.github.portlek.configs.bukkit.BukkitManaged;
+import io.github.portlek.configs.bukkit.BukkitSection;
 import io.github.portlek.configs.util.Replaceable;
 import io.github.portlek.database.Database;
 import io.github.portlek.database.SQL;
@@ -55,14 +55,14 @@ public final class ConfigFile extends BukkitManaged {
     private final Map<String, Wrapped> wrapped = new HashMap<>();
 
     // TODO: Change the plugin prefix as you want.
-    @Value
-    public Replaceable<String> plugin_prefix = Replaceable.of("&6[&eBukkitJavaGradle&6]")
+    @Property
+    public Replaceable<String> plugin_prefix = Replaceable.from("&6[&eBukkitJavaGradle&6]")
         .map(ColorUtil::colored);
 
-    @Value
+    @Property
     public String plugin_language = "en";
 
-    @Value
+    @Property
     public boolean check_for_update = true;
 
     @Override
@@ -92,9 +92,7 @@ public final class ConfigFile extends BukkitManaged {
     @NotNull
     @SuppressWarnings("unchecked")
     public <T extends Wrapped> Optional<T> getWrapped(@NotNull final String wrappedId) {
-        return Optional.ofNullable(
-            (T) this.wrapped.get(wrappedId)
-        );
+        return Optional.ofNullable((T) this.wrapped.get(wrappedId));
     }
 
     private boolean isMySQL() {
@@ -187,34 +185,34 @@ public final class ConfigFile extends BukkitManaged {
         @Instance
         public final ConfigFile.Saving.MySQL mysql = new ConfigFile.Saving.MySQL();
 
-        @Value
+        @Property
         public String storage_type = "sqlite";
 
-        @Value
+        @Property
         public boolean save_when_plugin_disable = true;
 
-        @Value
+        @Property
         public boolean auto_save = true;
 
-        @Value
+        @Property
         public int auto_save_time = 60;
 
         @Section(path = "mysql")
         public static final class MySQL extends BukkitSection {
 
-            @Value
+            @Property
             public String host = "localhost";
 
-            @Value
+            @Property
             public int port = 3306;
 
-            @Value
+            @Property
             public String database = "database";
 
-            @Value
+            @Property
             public String username = "username";
 
-            @Value
+            @Property
             public String password = "password";
 
         }
@@ -224,22 +222,22 @@ public final class ConfigFile extends BukkitManaged {
     @Section(path = "hooks")
     public static final class Hooks extends BukkitSection {
 
-        @Value
+        @Property
         public boolean auto_detect = true;
 
-        @Value
+        @Property
         public boolean PlaceholderAPI = false;
 
-        @Value
+        @Property
         public boolean GroupManager = false;
 
-        @Value
+        @Property
         public boolean LuckPerms = false;
 
-        @Value
+        @Property
         public boolean PermissionsEX = false;
 
-        @Value
+        @Property
         public boolean Vault = false;
 
     }

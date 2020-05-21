@@ -2,6 +2,7 @@ package io.github.plugintemplate.bukkitjavagradle.util;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
@@ -9,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
+@RequiredArgsConstructor
 public final class ListenerBasic<T extends Event> {
 
     @NotNull
@@ -25,13 +27,6 @@ public final class ListenerBasic<T extends Event> {
 
     public ListenerBasic(@NotNull final Class<T> tClass, @NotNull final Predicate<T> predicate, @NotNull final Consumer<T> consumer) {
         this(tClass, predicate, consumer, EventPriority.NORMAL);
-    }
-
-    public ListenerBasic(@NotNull final Class<T> tClass, @NotNull final Predicate<T> predicate, @NotNull final Consumer<T> consumer, @NotNull final EventPriority eventPriority) {
-        this.tClass = tClass;
-        this.predicate = predicate;
-        this.consumer = consumer;
-        this.eventPriority = eventPriority;
     }
 
     public ListenerBasic(@NotNull final Class<T> tClass, @NotNull final EventPriority eventPriority,

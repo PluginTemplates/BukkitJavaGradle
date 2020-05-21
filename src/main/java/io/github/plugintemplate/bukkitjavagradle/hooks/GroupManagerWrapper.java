@@ -1,6 +1,5 @@
 package io.github.plugintemplate.bukkitjavagradle.hooks;
 
-import io.github.plugintemplate.bukkitjavagradle.Wrapped;
 import org.anjocaido.groupmanager.GroupManager;
 import org.anjocaido.groupmanager.permissions.AnjoPermissionsHandler;
 import org.bukkit.entity.Player;

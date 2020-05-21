@@ -1,7 +1,5 @@
 package io.github.plugintemplate.bukkitjavagradle.hooks;
 
-import io.github.plugintemplate.bukkitjavagradle.Hook;
-import io.github.plugintemplate.bukkitjavagradle.Wrapped;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;

@@ -1,6 +1,5 @@
 package io.github.plugintemplate.bukkitjavagradle.hooks;
 
-import io.github.plugintemplate.bukkitjavagradle.Wrapped;
 import java.util.List;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

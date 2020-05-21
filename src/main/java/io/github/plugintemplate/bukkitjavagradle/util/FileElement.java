@@ -1,21 +1,24 @@
 package io.github.plugintemplate.bukkitjavagradle.util;
 
-import io.github.portlek.configs.BukkitManaged;
-import io.github.portlek.configs.CfgSection;
-import io.github.portlek.configs.util.Provided;
-import io.github.portlek.smartinventory.ClickableItem;
-import io.github.portlek.smartinventory.content.InventoryContents;
+import io.github.portlek.configs.bukkit.BkktSection;
+import io.github.portlek.configs.provided.Provided;
+import io.github.portlek.configs.structure.managed.section.CfgSection;
+import io.github.portlek.smartinventory.Icon;
+import io.github.portlek.smartinventory.InventoryContents;
+import io.github.portlek.smartinventory.event.abs.ClickEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
-import org.bukkit.event.inventory.InventoryClickEvent;
+import lombok.RequiredArgsConstructor;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
+@RequiredArgsConstructor
 public final class FileElement {
 
     @NotNull
@@ -25,20 +28,19 @@ public final class FileElement {
 
     private final int column;
 
-    public FileElement(@NotNull final ItemStack itemStack, final int row, final int column) {
-        this.itemStack = itemStack;
-        this.row = row;
-        this.column = column;
-    }
-
     public FileElement(@NotNull final FileElement fileElement) {
         this.itemStack = fileElement.itemStack;
         this.row = fileElement.row;
         this.column = fileElement.column;
     }
 
-    public void insert(@NotNull final InventoryContents contents, @NotNull final Consumer<InventoryClickEvent> consumer) {
-        contents.set(this.row, this.column, ClickableItem.of(this.itemStack, consumer));
+    public void insert(@NotNull final InventoryContents contents, @NotNull final Consumer<ClickEvent> consumer) {
+        contents.set(this.row, this.column, this.clickableItem(consumer));
+    }
+
+    @NotNull
+    public Icon clickableItem(@NotNull final Consumer<ClickEvent> consumer) {
+        return Icon.from(this.itemStack).whenclick(consumer);
     }
 
     public void fill(@NotNull final InventoryContents contents) {
@@ -46,8 +48,8 @@ public final class FileElement {
         });
     }
 
-    public void fill(@NotNull final InventoryContents contents, @NotNull final Consumer<InventoryClickEvent> consumer) {
-        contents.fill(ClickableItem.of(this.itemStack, consumer));
+    public void fill(@NotNull final InventoryContents contents, @NotNull final Consumer<ClickEvent> consumer) {
+        contents.fill(this.clickableItem(consumer));
     }
 
     @NotNull
@@ -84,17 +86,10 @@ public final class FileElement {
     }
 
     @NotNull
-    public ClickableItem clickableItem(@NotNull final Consumer<InventoryClickEvent> consumer) {
-        return ClickableItem.of(this.itemStack, consumer);
-    }
-
-    @NotNull
-    public FileElement changeItem(@NotNull final ItemStack itemStack) {
-        return new FileElement(
-            itemStack,
-            this.row,
-            this.column
-        );
+    public FileElement replace(@NotNull final Material material) {
+        final ItemStack clone = this.itemStack.clone();
+        clone.setType(material);
+        return new FileElement(clone, this.row, this.column);
     }
 
     @NotNull
@@ -110,30 +105,26 @@ public final class FileElement {
         return this.column;
     }
 
-    // TODO Don't forget the registering that provider into a file class in #load() method.
     public static class Provider implements Provided<FileElement> {
 
         @Override
         public void set(@NotNull final FileElement fileElement, @NotNull final CfgSection section, @NotNull final String s) {
-            section.set(s + ".row", fileElement.row);
-            section.set(s + ".column", fileElement.column);
-            ((BukkitManaged) section).setItemStack(s, fileElement.itemStack);
+            section.set("row", fileElement.row);
+            section.set("column", fileElement.column);
+            ((BkktSection) section).setItemStack(s, fileElement.itemStack);
         }
 
         @NotNull
         @Override
         public Optional<FileElement> get(@NotNull final CfgSection section, @NotNull final String s) {
-            if (!s.contains("element") || !section.getSection(s).isPresent()) {
+            final Optional<ItemStack> itemStackOptional = ((BkktSection) section).getItemStack(s);
+            final Optional<Integer> rowOptional = section.getInteger("row");
+            final Optional<Integer> columnOptional = section.getInteger("column");
+            if (!itemStackOptional.isPresent() || !rowOptional.isPresent() || !columnOptional.isPresent()) {
                 return Optional.empty();
             }
-            final BukkitManaged bukkitManaged = (BukkitManaged) section;
-            return bukkitManaged.getItemStack(s).map(stack ->
-                new FileElement(
-                    stack,
-                    section.getInt(s + ".row"),
-                    section.getInt(s + ".column")
-                )
-            );
+            return Optional.of(
+                new FileElement(itemStackOptional.get(), rowOptional.get(), columnOptional.get()));
         }
 
     }

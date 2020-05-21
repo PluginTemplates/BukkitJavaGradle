@@ -1,6 +1,5 @@
 package io.github.plugintemplate.bukkitjavagradle.hooks;
 
-import io.github.plugintemplate.bukkitjavagradle.Hook;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 import ru.tehkode.permissions.bukkit.PermissionsEx;

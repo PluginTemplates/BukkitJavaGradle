@@ -1,7 +1,5 @@
 package io.github.plugintemplate.bukkitjavagradle.hooks;
 
-import io.github.plugintemplate.bukkitjavagradle.Hook;
-import io.github.plugintemplate.bukkitjavagradle.Wrapped;
 import me.clip.placeholderapi.PlaceholderAPIPlugin;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;

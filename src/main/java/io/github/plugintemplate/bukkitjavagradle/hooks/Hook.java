@@ -1,4 +1,4 @@
-package io.github.plugintemplate.bukkitjavagradle;
+package io.github.plugintemplate.bukkitjavagradle.hooks;
 
 import org.jetbrains.annotations.NotNull;
 

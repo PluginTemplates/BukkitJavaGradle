@@ -18,8 +18,7 @@ public final class BukkitJavaGradle extends JavaPlugin {
     @NotNull
     public static BukkitJavaGradle getInstance() {
         return Optional.ofNullable(BukkitJavaGradle.instance).orElseThrow(() ->
-            new IllegalStateException("You cannot be used BukkitJavaGradle plugin before its start!")
-        );
+            new IllegalStateException("You cannot be used BukkitJavaGradle plugin before its start!"));
     }
 
     private void setInstance(@NotNull final BukkitJavaGradle instance) {
@@ -34,8 +33,7 @@ public final class BukkitJavaGradle extends JavaPlugin {
     @NotNull
     public static BukkitJavaGradleAPI getAPI() {
         return Optional.ofNullable(BukkitJavaGradle.api).orElseThrow(() ->
-            new IllegalStateException("You cannot be used BukkitJavaGradle plugin before its start!")
-        );
+            new IllegalStateException("You cannot be used BukkitJavaGradle plugin before its start!"));
     }
 
     private void setAPI(@NotNull final BukkitJavaGradleAPI loader) {
@@ -54,9 +52,7 @@ public final class BukkitJavaGradle extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (BukkitJavaGradle.api != null) {
-            BukkitJavaGradle.api.disablePlugin();
-        }
+        Optional.ofNullable(BukkitJavaGradle.api).ifPresent(BukkitJavaGradleAPI::disablePlugin);
     }
 
     @Override
@@ -66,23 +62,18 @@ public final class BukkitJavaGradle extends JavaPlugin {
         this.setAPI(api);
         this.getServer().getScheduler().runTask(this, () ->
             this.getServer().getScheduler().runTaskAsynchronously(this, () ->
-                api.reloadPlugin(true)
-            )
-        );
+                api.reloadPlugin(true)));
         manager.getCommandConditions().addCondition(String[].class, "player", (c, exec, value) -> {
             if (value == null || value.length == 0) {
                 return;
             }
             final String name = value[c.getConfigValue("arg", 0)];
             if (c.hasConfig("arg") && Bukkit.getPlayer(name) == null) {
-                throw new ConditionFailedException(
-                    api.languageFile.errors.player_not_found.build("%player_name%", () -> name)
-                );
+                throw new ConditionFailedException(api.languageFile.errors.player_not_found
+                    .build("%player_name%", () -> name));
             }
         });
-        manager.registerCommand(
-            new BukkitJavaGradleCommand(api)
-        );
+        manager.registerCommand(new BukkitJavaGradleCommand());
     }
 
 }

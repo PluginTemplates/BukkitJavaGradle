@@ -2,24 +2,17 @@ package io.github.plugintemplate.bukkitjavagradle.util;
 
 import java.util.Map;
 import java.util.function.Predicate;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+@RequiredArgsConstructor
 public final class InventoryIsFull implements Predicate<ItemStack> {
 
     @NotNull
     private final Player player;
-
-    /**
-     * ctor.
-     *
-     * @param plyr the player to check
-     */
-    public InventoryIsFull(@NotNull final Player plyr) {
-        this.player = plyr;
-    }
 
     /**
      * checks if player has enough space for the itemStack

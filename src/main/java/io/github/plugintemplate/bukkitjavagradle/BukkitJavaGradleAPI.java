@@ -5,7 +5,8 @@ import io.github.plugintemplate.bukkitjavagradle.file.LanguageFile;
 import io.github.plugintemplate.bukkitjavagradle.util.ListenerBasic;
 import io.github.plugintemplate.bukkitjavagradle.util.UpdateChecker;
 import io.github.portlek.database.SQL;
-import io.github.portlek.smartinventory.InventoryManager;
+import io.github.portlek.smartinventory.SmartInventory;
+import io.github.portlek.smartinventory.manager.BasicSmartInventory;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public final class BukkitJavaGradleAPI {
 
     @NotNull
-    public final InventoryManager inventoryManager;
+    public final SmartInventory inventoryManager;
 
     @NotNull
     public final BukkitJavaGradle bukkitJavaGradle;
@@ -29,7 +30,7 @@ public final class BukkitJavaGradleAPI {
     public SQL sql;
 
     public BukkitJavaGradleAPI(@NotNull final BukkitJavaGradle bukkitJavaGradle) {
-        this.inventoryManager = new InventoryManager(bukkitJavaGradle);
+        this.inventoryManager = new BasicSmartInventory(bukkitJavaGradle);
         this.bukkitJavaGradle = bukkitJavaGradle;
         this.configFile = new ConfigFile();
         this.languageFile = new LanguageFile(this.configFile);
@@ -77,15 +78,11 @@ public final class BukkitJavaGradleAPI {
 
         try {
             if (updater.checkForUpdates()) {
-                sender.sendMessage(
-                    this.languageFile.generals.new_version_found
-                        .build("%version%", updater::getLatestVersion)
-                );
+                sender.sendMessage(this.languageFile.generals.new_version_found
+                    .build("%version%", updater::getLatestVersion));
             } else {
-                sender.sendMessage(
-                    this.languageFile.generals.latest_version
-                        .build("%version%", updater::getLatestVersion)
-                );
+                sender.sendMessage(this.languageFile.generals.latest_version
+                    .build("%version%", updater::getLatestVersion));
             }
         } catch (final Exception exception) {
             this.bukkitJavaGradle.getLogger().warning("Update checker failed, could not connect to the API.");
