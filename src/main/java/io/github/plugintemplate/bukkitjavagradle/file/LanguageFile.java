@@ -53,7 +53,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
                         .append('\n')
                         .append("&7/bukkitjavagradle version &r> &eChecks for update.")
                         .append('\n')
-                        .append("&7/bukkitkotlinmaven message <player> <message> &r> &eSends the message to the player."))
+                        .append("&7/bukkitjavagradle message <player> <message> &r> &eSends the message to the player."))
                     .map(ColorUtil::colored)
                     .replace(this.getPrefix()));
         }
@@ -71,7 +71,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
                         .append('\n')
                         .append("&7/bukkitjavagradle version &r> &eGüncellemeleri kontrol eder.")
                         .append('\n')
-                        .append("&7/bukkitkotlinmaven message <oyuncu> <mesaj> &r> &eMesajı oyuncuya gönderir."))
+                        .append("&7/bukkitjavagradle message <oyuncu> <mesaj> &r> &eMesajı oyuncuya gönderir."))
                     .map(ColorUtil::colored)
                     .replace(this.getPrefix()));
         }
