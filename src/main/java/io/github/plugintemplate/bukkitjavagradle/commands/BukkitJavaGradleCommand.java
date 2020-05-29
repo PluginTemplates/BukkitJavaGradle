@@ -3,7 +3,7 @@ package io.github.plugintemplate.bukkitjavagradle.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import io.github.plugintemplate.bukkitjavagradle.BukkitJavaGradle;
-import io.github.portlek.bukkititembuilder.util.ColorUtil;
+import io.github.portlek.configs.bukkit.util.ColorUtil;
 import java.util.Optional;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
