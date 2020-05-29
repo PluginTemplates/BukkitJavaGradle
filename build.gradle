@@ -62,7 +62,7 @@ spigot {
     description = "Plugin Template for Bukkit on Java with Gradle."
     apiVersion = "1.13"
     authors = ["portlek"]
-    softDepends = ["Vault", "GroupManager", "LuckPerms", "PermissionsEx", "PlaceholderAPI"]
+    softDepends = ["Vault", "LuckPerms", "PlaceholderAPI"]
     commands {
         bukkitjavagradle {
             description = 'Main command of the plugin.'
