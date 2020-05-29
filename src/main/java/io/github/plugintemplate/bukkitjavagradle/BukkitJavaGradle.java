@@ -68,7 +68,7 @@ public final class BukkitJavaGradle extends JavaPlugin {
             if (value == null || value.length == 0) {
                 return;
             }
-            final Integer arg = context.getConfigValue("arg", 0);
+            final int arg = context.getConfigValue("arg", 0);
             if (arg >= value.length) {
                 return;
             }
