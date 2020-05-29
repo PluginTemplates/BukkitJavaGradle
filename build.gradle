@@ -17,7 +17,6 @@ repositories {
     jcenter()
     spigot()
     jitpack()
-    codemc()
     maven {
         url = "https://repo.aikar.co/content/groups/aikar/"
     }
@@ -26,9 +25,6 @@ repositories {
     }
     maven {
         url = "http://repo.extendedclip.com/content/repositories/placeholderapi/"
-    }
-    maven {
-        url = "http://pex-repo.aoeu.xyz"
     }
 }
 
@@ -49,8 +45,6 @@ dependencies {
 
     // Hooks
     compileOnly("me.clip:placeholderapi:2.10.6")
-    compileOnly("org.anjocaido:groupmanagerx:2.2-SNAPSHOT")
-    compileOnly("ru.tehkode:PermissionsEx:1.23.5-SNAPSHOT")
     compileOnly vault()
     compileOnly luckPerms()
 }

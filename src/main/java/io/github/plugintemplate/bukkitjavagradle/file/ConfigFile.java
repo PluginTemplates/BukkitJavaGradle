@@ -32,11 +32,7 @@ public final class ConfigFile extends BukkitManaged {
     // Hook Paths
     private static final String PLACEHOLDER_API = "PlaceholderAPI";
 
-    private static final String GROUP_MANAGER = "GroupManager";
-
     private static final String LUCK_PERMS = "LuckPerms";
-
-    private static final String PERMISSIONS_EX = "PermissionsEx";
 
     private static final String VAULT = "Vault";
 
@@ -115,26 +111,6 @@ public final class ConfigFile extends BukkitManaged {
             () -> {
                 this.hooks.PlaceholderAPI = false;
                 this.hooks.set(ConfigFile.PLACEHOLDER_API, false);
-            });
-        this.hookLittle(this.hooks.GroupManager, new GroupManagerHook(), ConfigFile.GROUP_MANAGER, () ->
-                !this.wrapped.containsKey(ConfigFile.PERMISSIONS_EX) && !this.wrapped.containsKey(ConfigFile.LUCK_PERMS),
-            () -> {
-                this.hooks.GroupManager = true;
-                this.hooks.set(ConfigFile.GROUP_MANAGER, true);
-            },
-            () -> {
-                this.hooks.GroupManager = false;
-                this.hooks.set(ConfigFile.GROUP_MANAGER, false);
-            });
-        this.hookLittle(this.hooks.PermissionsEX, new PermissionsExHook(), ConfigFile.PERMISSIONS_EX, () ->
-                !this.wrapped.containsKey(ConfigFile.GROUP_MANAGER) && !this.wrapped.containsKey(ConfigFile.LUCK_PERMS),
-            () -> {
-                this.hooks.PermissionsEX = true;
-                this.hooks.set(ConfigFile.PERMISSIONS_EX, true);
-            },
-            () -> {
-                this.hooks.PermissionsEX = false;
-                this.hooks.set(ConfigFile.PERMISSIONS_EX, false);
             });
         this.hookLittle(this.hooks.Vault, new VaultHook(), ConfigFile.VAULT,
             () -> {
