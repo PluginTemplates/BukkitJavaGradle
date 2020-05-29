@@ -1,9 +1,9 @@
 package io.github.plugintemplate.bukkitjavagradle.file;
 
-import io.github.portlek.bukkititembuilder.util.ColorUtil;
 import io.github.portlek.configs.annotations.*;
 import io.github.portlek.configs.bukkit.BukkitLinkedManaged;
 import io.github.portlek.configs.bukkit.BukkitSection;
+import io.github.portlek.configs.bukkit.util.ColorUtil;
 import io.github.portlek.configs.util.MapEntry;
 import io.github.portlek.configs.util.Replaceable;
 import java.util.Map;
@@ -11,11 +11,11 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
 
-@LinkedConfig(files = {
+@LinkedConfig(value = {
     @LinkedFile(
         key = "en",
         config = @Config(
-            name = "en_US",
+            value = "en_US",
             // TODO: Change the plugin data folder as you want.
             location = "%basedir%/BukkitJavaGradle/languages"
         )
@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
     @LinkedFile(
         key = "tr",
         config = @Config(
-            name = "tr_TR",
+            value = "tr_TR",
             // TODO: Change the plugin data folder as you want.
             location = "%basedir%/BukkitJavaGradle/languages"
         )
@@ -93,7 +93,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
             new IllegalStateException("Config couldn't put into the objects!"));
     }
 
-    @Section(path = "error")
+    @Section("error")
     public class Error extends BukkitSection {
 
         @Property
@@ -117,7 +117,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
 
     }
 
-    @Section(path = "general")
+    @Section("general")
     public class General extends BukkitSection {
 
         @Property

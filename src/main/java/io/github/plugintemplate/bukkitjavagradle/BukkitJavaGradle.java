@@ -1,7 +1,6 @@
 package io.github.plugintemplate.bukkitjavagradle;
 
-import co.aikar.commands.BukkitCommandManager;
-import co.aikar.commands.ConditionFailedException;
+import co.aikar.commands.*;
 import io.github.plugintemplate.bukkitjavagradle.commands.BukkitJavaGradleCommand;
 import java.util.Optional;
 import org.bukkit.Bukkit;
@@ -57,18 +56,24 @@ public final class BukkitJavaGradle extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        final BukkitCommandManager manager = new BukkitCommandManager(this);
         final BukkitJavaGradleAPI api = new BukkitJavaGradleAPI(this);
         this.setAPI(api);
         this.getServer().getScheduler().runTask(this, () ->
             this.getServer().getScheduler().runTaskAsynchronously(this, () ->
                 api.reloadPlugin(true)));
-        manager.getCommandConditions().addCondition(String[].class, "player", (c, exec, value) -> {
+        final BukkitCommandManager manager = new BukkitCommandManager(this);
+        final CommandConditions<BukkitCommandIssuer, BukkitCommandExecutionContext, BukkitConditionContext> conditions =
+            manager.getCommandConditions();
+        conditions.addCondition(String[].class, "player", (context, exec, value) -> {
             if (value == null || value.length == 0) {
                 return;
             }
-            final String name = value[c.getConfigValue("arg", 0)];
-            if (c.hasConfig("arg") && Bukkit.getPlayer(name) == null) {
+            final Integer arg = context.getConfigValue("arg", 0);
+            if (arg >= value.length) {
+                return;
+            }
+            final String name = value[arg];
+            if (context.hasConfig("arg") && Bukkit.getPlayer(name) == null) {
                 throw new ConditionFailedException(api.languageFile.errors.player_not_found
                     .build("%player_name%", () -> name));
             }

@@ -2,13 +2,13 @@ package io.github.plugintemplate.bukkitjavagradle.file;
 
 import io.github.plugintemplate.bukkitjavagradle.BukkitJavaGradle;
 import io.github.plugintemplate.bukkitjavagradle.hooks.*;
-import io.github.portlek.bukkititembuilder.util.ColorUtil;
 import io.github.portlek.configs.annotations.Config;
 import io.github.portlek.configs.annotations.Instance;
 import io.github.portlek.configs.annotations.Property;
 import io.github.portlek.configs.annotations.Section;
 import io.github.portlek.configs.bukkit.BukkitManaged;
 import io.github.portlek.configs.bukkit.BukkitSection;
+import io.github.portlek.configs.bukkit.util.ColorUtil;
 import io.github.portlek.configs.util.Replaceable;
 import io.github.portlek.database.Database;
 import io.github.portlek.database.SQL;
@@ -23,7 +23,7 @@ import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 @Config(
-    name = "config",
+    value = "config",
     // TODO: Change the plugin data folder as you want.
     location = "%basedir%/BukkitJavaGradle"
 )
@@ -149,7 +149,7 @@ public final class ConfigFile extends BukkitManaged {
                 this.plugin_prefix.build() + " &r>> &a" + path + " is hooking"));
     }
 
-    @Section(path = "saving")
+    @Section("saving")
     public static final class Saving extends BukkitSection {
 
         @Instance
@@ -167,7 +167,7 @@ public final class ConfigFile extends BukkitManaged {
         @Property
         public int auto_save_time = 60;
 
-        @Section(path = "mysql")
+        @Section("mysql")
         public static final class MySQL extends BukkitSection {
 
             @Property
@@ -189,7 +189,7 @@ public final class ConfigFile extends BukkitManaged {
 
     }
 
-    @Section(path = "hooks")
+    @Section("hooks")
     public static final class Hooks extends BukkitSection {
 
         @Property
@@ -199,13 +199,7 @@ public final class ConfigFile extends BukkitManaged {
         public boolean PlaceholderAPI = false;
 
         @Property
-        public boolean GroupManager = false;
-
-        @Property
         public boolean LuckPerms = false;
-
-        @Property
-        public boolean PermissionsEX = false;
 
         @Property
         public boolean Vault = false;
