@@ -3,4 +3,4 @@ before_install:
   - chmod +x gradlew
 install: true
 script:
-  - gradlew build
+  - ./gradlew build
