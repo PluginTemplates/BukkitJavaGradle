@@ -41,7 +41,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
     // Main
-    compileOnly bukkit()
+    compileOnly spigot()
 
     // Hooks
     compileOnly("me.clip:placeholderapi:2.10.6")
@@ -51,6 +51,7 @@ dependencies {
 
 shadowJar {
     relocate('co.aikar.commands', this.group + ".bukkitjavagradle.commands")
+    // Change the bukkitjavagradle.file case.
     relocate('io.github.portlek.configs', this.group + ".bukkitjavagradle.file")
     minimize()
     setArchivesBaseName(this.name)
