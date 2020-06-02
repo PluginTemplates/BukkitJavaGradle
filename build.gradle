@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'maven-publish'
     id 'kr.entree.spigradle' version '1.2.4'
-    id "com.github.johnrengelman.shadow" version "5.2.0"
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
 }
 
 group = "io.github.plugintemplate"
@@ -36,8 +36,8 @@ dependencies {
     
     // Other Stuffs
     compileOnly("org.jetbrains:annotations:19.0.0")
-    compileOnly 'org.projectlombok:lombok:1.18.12'
-    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    compileOnly("org.projectlombok:lombok:1.18.12")
+    annotationProcessor("org.projectlombok:lombok:1.18.12")
 
     // Main
     compileOnly spigot()
