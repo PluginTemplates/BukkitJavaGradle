@@ -4,8 +4,9 @@ import io.github.portlek.configs.annotations.*;
 import io.github.portlek.configs.bukkit.BukkitLinkedManaged;
 import io.github.portlek.configs.bukkit.BukkitSection;
 import io.github.portlek.configs.bukkit.util.ColorUtil;
+import io.github.portlek.configs.replaceable.Replaceable;
+import io.github.portlek.configs.replaceable.ReplaceableString;
 import io.github.portlek.configs.util.MapEntry;
-import io.github.portlek.configs.util.Replaceable;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -38,7 +39,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
     public LanguageFile.General generals = new General();
 
     @Property
-    public Replaceable<String> help_messages = this.match(s -> {
+    public ReplaceableString help_messages = this.match(s -> {
         if ("en".equals(s)) {
             return Optional.of(
                 Replaceable.from(
@@ -97,7 +98,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
     public class Error extends BukkitSection {
 
         @Property
-        public Replaceable<String> player_not_found = LanguageFile.this.match(s -> {
+        public ReplaceableString player_not_found = LanguageFile.this.match(s -> {
             if ("en".equals(s)) {
                 return Optional.of(
                     Replaceable.from("%prefix% &cPlayer not found! (%player%)")
@@ -121,7 +122,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
     public class General extends BukkitSection {
 
         @Property
-        public Replaceable<String> reload_complete = LanguageFile.this.match(s -> {
+        public ReplaceableString reload_complete = LanguageFile.this.match(s -> {
             if ("en".equals(s)) {
                 return Optional.of(
                     Replaceable.from("%prefix% &aReload complete! &7Took (%ms%ms)")
@@ -142,7 +143,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
         });
 
         @Property
-        public Replaceable<String> new_version_found = LanguageFile.this.match(s -> {
+        public ReplaceableString new_version_found = LanguageFile.this.match(s -> {
             if ("en".equals(s)) {
                 return Optional.of(
                     Replaceable.from("%prefix% &eNew version found (v%version%)")
@@ -163,7 +164,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
         });
 
         @Property
-        public Replaceable<String> latest_version = LanguageFile.this.match(s -> {
+        public ReplaceableString latest_version = LanguageFile.this.match(s -> {
             if ("en".equals(s)) {
                 return Optional.of(
                     Replaceable.from("%prefix% &aYou're using the latest version (v%version%)")

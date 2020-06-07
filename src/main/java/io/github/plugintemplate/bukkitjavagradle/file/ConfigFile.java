@@ -9,8 +9,10 @@ import io.github.portlek.configs.annotations.Section;
 import io.github.portlek.configs.bukkit.BukkitManaged;
 import io.github.portlek.configs.bukkit.BukkitSection;
 import io.github.portlek.configs.bukkit.util.ColorUtil;
-import io.github.portlek.configs.util.Replaceable;
+import io.github.portlek.configs.replaceable.Replaceable;
+import io.github.portlek.configs.replaceable.ReplaceableString;
 import io.github.portlek.database.Database;
+import io.github.portlek.database.MapEntry;
 import io.github.portlek.database.SQL;
 import io.github.portlek.database.database.MySQL;
 import io.github.portlek.database.database.SQLite;
@@ -48,7 +50,7 @@ public final class ConfigFile extends BukkitManaged {
 
     // TODO: Change the plugin prefix as you want.
     @Property
-    public Replaceable<String> plugin_prefix = Replaceable.from("&6[&eBukkitJavaGradle&6]")
+    public ReplaceableString plugin_prefix = Replaceable.from("&6[&eBukkitJavaGradle&6]")
         .map(ColorUtil::colored);
 
     @Property
