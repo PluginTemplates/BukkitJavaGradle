@@ -2,7 +2,7 @@ package io.github.plugintemplate.bukkitjavagradle.util;
 
 import io.github.portlek.configs.bukkit.BkktSection;
 import io.github.portlek.configs.provided.Provided;
-import io.github.portlek.configs.structure.managed.section.CfgSection;
+import io.github.portlek.configs.structure.section.CfgSection;
 import io.github.portlek.smartinventory.Icon;
 import io.github.portlek.smartinventory.InventoryContents;
 import io.github.portlek.smartinventory.event.abs.ClickEvent;
