@@ -90,7 +90,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
 
     @NotNull
     private ConfigFile getConfig() {
-        return (ConfigFile) this.pull("config").orElseThrow(() ->
+        return (ConfigFile) this.object("config").orElseThrow(() ->
             new IllegalStateException("Config couldn't put into the objects!"));
     }
 
