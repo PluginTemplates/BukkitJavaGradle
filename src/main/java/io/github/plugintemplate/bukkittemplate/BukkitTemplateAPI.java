@@ -3,8 +3,10 @@ package io.github.plugintemplate.bukkittemplate;
 import co.aikar.idb.DB;
 import io.github.plugintemplate.bukkittemplate.file.ConfigFile;
 import io.github.plugintemplate.bukkittemplate.file.LanguageFile;
+import io.github.plugintemplate.bukkittemplate.util.FileElement;
 import io.github.plugintemplate.bukkittemplate.util.ListenerBasic;
 import io.github.plugintemplate.bukkittemplate.util.UpdateChecker;
+import io.github.portlek.configs.CfgSection;
 import io.github.portlek.smartinventory.SmartInventory;
 import io.github.portlek.smartinventory.manager.BasicSmartInventory;
 import org.bukkit.command.CommandSender;
@@ -29,6 +31,7 @@ public final class BukkitTemplateAPI {
     public BukkitTemplateAPI(@NotNull final BukkitTemplate bukkitTemplate) {
         this.inventoryManager = new BasicSmartInventory(bukkitTemplate);
         this.bukkitTemplate = bukkitTemplate;
+        CfgSection.addProvidedClass(FileElement.class, new FileElement.Provider());
     }
 
     public void reloadPlugin(final boolean first) {
