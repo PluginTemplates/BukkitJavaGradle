@@ -17,12 +17,12 @@ public final class BukkitTemplate extends JavaPlugin {
     @NotNull
     public static BukkitTemplate getInstance() {
         return Optional.ofNullable(BukkitTemplate.instance).orElseThrow(() ->
-            new IllegalStateException("You cannot be used BukkitJavaGradle plugin before its start!"));
+            new IllegalStateException("You cannot be used BukkitTemplate plugin before its start!"));
     }
 
     private void setInstance(@NotNull final BukkitTemplate instance) {
         if (Optional.ofNullable(BukkitTemplate.instance).isPresent()) {
-            throw new IllegalStateException("You can't use #setInstance method twice!");
+            throw new IllegalStateException("You can't use BukkitTemplate#setInstance method twice!");
         }
         synchronized (this) {
             BukkitTemplate.instance = instance;
@@ -32,12 +32,12 @@ public final class BukkitTemplate extends JavaPlugin {
     @NotNull
     public static BukkitTemplateAPI getAPI() {
         return Optional.ofNullable(BukkitTemplate.api).orElseThrow(() ->
-            new IllegalStateException("You cannot be used BukkitJavaGradle plugin before its start!"));
+            new IllegalStateException("You cannot be used BukkitTemplate plugin before its start!"));
     }
 
     private void setAPI(@NotNull final BukkitTemplateAPI loader) {
         if (Optional.ofNullable(BukkitTemplate.api).isPresent()) {
-            throw new IllegalStateException("You can't use #setAPI method twice!");
+            throw new IllegalStateException("You can't use BukkitTemplate#setAPI method twice!");
         }
         synchronized (this) {
             BukkitTemplate.api = loader;
