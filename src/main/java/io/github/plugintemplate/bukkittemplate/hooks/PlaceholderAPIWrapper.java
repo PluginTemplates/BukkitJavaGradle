@@ -1,4 +1,4 @@
-package io.github.plugintemplate.bukkitjavagradle.hooks;
+package io.github.plugintemplate.bukkittemplate.hooks;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.entity.Player;

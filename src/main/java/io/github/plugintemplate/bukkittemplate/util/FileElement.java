@@ -1,4 +1,4 @@
-package io.github.plugintemplate.bukkitjavagradle.util;
+package io.github.plugintemplate.bukkittemplate.util;
 
 import io.github.portlek.configs.CfgSection;
 import io.github.portlek.configs.Provided;

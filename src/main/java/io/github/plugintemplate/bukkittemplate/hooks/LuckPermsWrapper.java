@@ -1,4 +1,4 @@
-package io.github.plugintemplate.bukkitjavagradle.hooks;
+package io.github.plugintemplate.bukkittemplate.hooks;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.model.user.User;

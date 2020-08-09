@@ -1,4 +1,4 @@
-package io.github.plugintemplate.bukkitjavagradle.hooks;
+package io.github.plugintemplate.bukkittemplate.hooks;
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;

@@ -61,11 +61,11 @@ dependencies {
 }
 
 shadowJar {
-    // Change the "bukkitjavagradle" case.
-    relocate('co.aikar.commands', this.group + ".bukkitjavagradle.commands")
-    relocate('io.github.portlek.configs', this.group + ".bukkitjavagradle.file")
-    relocate('org.simpleyaml', this.group + ".bukkitjavagradle.simpleyaml")
-    relocate('co.aikar.idb', this.group + ".bukkitjavagradle.db")
+    // Change the "bukkittemplate" case.
+    relocate('co.aikar.commands', this.group + ".bukkittemplate.commands")
+    relocate('io.github.portlek.configs', this.group + ".bukkittemplate.file")
+    relocate('org.simpleyaml', this.group + ".bukkittemplate.simpleyaml")
+    relocate('co.aikar.idb', this.group + ".bukkittemplate.db")
     minimize()
     setArchivesBaseName(this.name)
     archiveClassifier.set("")
@@ -78,54 +78,54 @@ spigot {
     authors = ["portlek"]
     softDepends = ["Vault", "LuckPerms", "PlaceholderAPI"]
     commands {
-        bukkitjavagradle {
+        bukkittemplate {
             description = 'Main command of the plugin.'
-            permission = 'bukkitjavagradle.command.main'
+            permission = 'bukkittemplate.command.main'
             permissionMessage = 'You do not have permission!'
             usage = '/<command> [help|reload|version]'
-            aliases = ['bjg']
+            aliases = ['bt']
         }
     }
     permissions {
-        'bukkigjavagradle.*' {
+        'bukkittemplate.*' {
             description = 'Allows you to access to the all plugin.'
             defaults = 'op'
             children = [
-                'bukkigjavagradle.command.*': true
+                'bukkittemplate.command.*': true
             ]
         }
-        'bukkitjavagradle.command.*' {
+        'bukkittemplate.command.*' {
             description = 'It allows you to use to all commands of the plugin.'
             defaults = 'op'
             children = [
-                'bukkitjavagradle.command.help'   : true,
-                'bukkitjavagradle.command.reload' : true,
-                'bukkitjavagradle.command.version': true,
-                'bukkitjavagradle.command.message': true
+                'bukkittemplate.command.help'   : true,
+                'bukkittemplate.command.reload' : true,
+                'bukkittemplate.command.version': true,
+                'bukkittemplate.command.message': true
             ]
         }
-        'bukkitjavagradle.version' {
+        'bukkittemplate.version' {
             description = 'It allows you to notify if there is a new update for the plugin on join.'
             defaults = 'op'
         }
-        'bukkitjavagradle.command.main' {
-            description = 'It allows you to use `/bukkitjavagradle` command.'
+        'bukkittemplate.command.main' {
+            description = 'It allows you to use `/bukkittemplate` command.'
             defaults = 'true'
         }
-        'bukkitjavagradle.command.help' {
-            description = 'It allows you to use to `/bukkitjavagralde help` command.'
+        'bukkittemplate.command.help' {
+            description = 'It allows you to use to `/bukkittemplate help` command.'
             defaults = 'true'
         }
-        'bukkitjavagradle.command.reload' {
-            description = 'It allows you to use to `/bukkitjavagradle reload` command.'
+        'bukkittemplate.command.reload' {
+            description = 'It allows you to use to `/bukkittemplate reload` command.'
             defaults = 'op'
         }
-        'bukkitjavagradle.command.version' {
-            description = 'It allows you to use to `/bukkitjavagradle version` command.'
+        'bukkittemplate.command.version' {
+            description = 'It allows you to use to `/bukkittemplate version` command.'
             defaults = 'op'
         }
-        'bukkitjavagradle.command.message' {
-            description = 'It allows you to use to `/bukkitjavagradle message` command.'
+        'bukkittemplate.command.message' {
+            description = 'It allows you to use to `/bukkittemplate message` command.'
             defaults = 'true'
         }
     }

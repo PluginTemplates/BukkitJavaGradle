@@ -1,10 +1,10 @@
-package io.github.plugintemplate.bukkitjavagradle;
+package io.github.plugintemplate.bukkittemplate;
 
 import co.aikar.idb.DB;
-import io.github.plugintemplate.bukkitjavagradle.file.ConfigFile;
-import io.github.plugintemplate.bukkitjavagradle.file.LanguageFile;
-import io.github.plugintemplate.bukkitjavagradle.util.ListenerBasic;
-import io.github.plugintemplate.bukkitjavagradle.util.UpdateChecker;
+import io.github.plugintemplate.bukkittemplate.file.ConfigFile;
+import io.github.plugintemplate.bukkittemplate.file.LanguageFile;
+import io.github.plugintemplate.bukkittemplate.util.ListenerBasic;
+import io.github.plugintemplate.bukkittemplate.util.UpdateChecker;
 import io.github.portlek.smartinventory.SmartInventory;
 import io.github.portlek.smartinventory.manager.BasicSmartInventory;
 import org.bukkit.command.CommandSender;
@@ -12,13 +12,13 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
 
 // TODO Change the class name as you want.
-public final class BukkitJavaGradleAPI {
+public final class BukkitTemplateAPI {
 
     @NotNull
     public final SmartInventory inventoryManager;
 
     @NotNull
-    public final BukkitJavaGradle bukkitJavaGradle;
+    public final BukkitTemplate bukkitTemplate;
 
     @NotNull
     public final ConfigFile configFile = new ConfigFile();
@@ -26,9 +26,9 @@ public final class BukkitJavaGradleAPI {
     @NotNull
     public final LanguageFile languageFile = new LanguageFile(this.configFile);
 
-    public BukkitJavaGradleAPI(@NotNull final BukkitJavaGradle bukkitJavaGradle) {
-        this.inventoryManager = new BasicSmartInventory(bukkitJavaGradle);
-        this.bukkitJavaGradle = bukkitJavaGradle;
+    public BukkitTemplateAPI(@NotNull final BukkitTemplate bukkitTemplate) {
+        this.inventoryManager = new BasicSmartInventory(bukkitTemplate);
+        this.bukkitTemplate = bukkitTemplate;
     }
 
     public void reloadPlugin(final boolean first) {
@@ -42,15 +42,15 @@ public final class BukkitJavaGradleAPI {
                 PlayerJoinEvent.class,
                 event -> event.getPlayer().hasPermission("bukkitjavagradle.version"),
                 event -> this.checkForUpdate(event.getPlayer())
-            ).register(this.bukkitJavaGradle);
+            ).register(this.bukkitTemplate);
             // TODO: Listeners should be here.
         }
 
-        this.bukkitJavaGradle.getServer().getScheduler().cancelTasks(this.bukkitJavaGradle);
+        this.bukkitTemplate.getServer().getScheduler().cancelTasks(this.bukkitTemplate);
 
         if (this.configFile.saving.auto_save) {
-            this.bukkitJavaGradle.getServer().getScheduler().runTaskTimer(
-                this.bukkitJavaGradle,
+            this.bukkitTemplate.getServer().getScheduler().runTaskTimer(
+                this.bukkitTemplate,
                 () -> {
                     // TODO Add codes for saving data as automatic
                 },
@@ -59,7 +59,7 @@ public final class BukkitJavaGradleAPI {
             );
         }
 
-        this.checkForUpdate(this.bukkitJavaGradle.getServer().getConsoleSender());
+        this.checkForUpdate(this.bukkitTemplate.getServer().getConsoleSender());
     }
 
     public void checkForUpdate(@NotNull final CommandSender sender) {
@@ -67,7 +67,7 @@ public final class BukkitJavaGradleAPI {
             return;
         }
         // TODO Change the UpdateChecker resource id as you want.
-        final UpdateChecker updater = new UpdateChecker(this.bukkitJavaGradle, 11111);
+        final UpdateChecker updater = new UpdateChecker(this.bukkitTemplate, 11111);
 
         try {
             if (updater.checkForUpdates()) {
@@ -78,7 +78,7 @@ public final class BukkitJavaGradleAPI {
                     .build("%version%", updater::getLatestVersion));
             }
         } catch (final Exception exception) {
-            this.bukkitJavaGradle.getLogger().warning("Update checker failed, could not connect to the API.");
+            this.bukkitTemplate.getLogger().warning("Update checker failed, could not connect to the API.");
         }
     }
 

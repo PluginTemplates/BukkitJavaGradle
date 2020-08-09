@@ -1,4 +1,4 @@
-package io.github.plugintemplate.bukkitjavagradle.util;
+package io.github.plugintemplate.bukkittemplate.util;
 
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;

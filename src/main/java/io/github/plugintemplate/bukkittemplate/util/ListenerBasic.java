@@ -1,4 +1,4 @@
-package io.github.plugintemplate.bukkitjavagradle.util;
+package io.github.plugintemplate.bukkittemplate.util;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;

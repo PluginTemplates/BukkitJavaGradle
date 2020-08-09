@@ -1,4 +1,4 @@
-package io.github.plugintemplate.bukkitjavagradle.file;
+package io.github.plugintemplate.bukkittemplate.file;
 
 import io.github.portlek.configs.annotations.*;
 import io.github.portlek.configs.bukkit.BukkitLinkedManaged;
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
             name = "en_US",
             type = YamlFileType.class,
             // TODO: Change the plugin data folder as you want.
-            location = "%basedir%/BukkitJavaGradle/languages"
+            location = "%basedir%/BukkitTemplate/languages"
         )
     ),
     @LinkedFile(
@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
             name = "tr_TR",
             type = YamlFileType.class,
             // TODO: Change the plugin data folder as you want.
-            location = "%basedir%/BukkitJavaGradle/languages"
+            location = "%basedir%/BukkitTemplate/languages"
         )
     ),
 })
@@ -47,30 +47,30 @@ public final class LanguageFile extends BukkitLinkedManaged {
             new StringBuilder()
                 .append("&a====== %prefix% &a======")
                 .append('\n')
-                .append("&7/bukkitjavagradle &r> &eShows help message.")
+                .append("&7/bukkittemplate &r> &eShows help message.")
                 .append('\n')
-                .append("&7/bukkitjavagradle help &r> &eShows help message.")
+                .append("&7/bukkittemplate help &r> &eShows help message.")
                 .append('\n')
-                .append("&7/bukkitjavagradle reload &r> &eReloads the plugin.")
+                .append("&7/bukkittemplate reload &r> &eReloads the plugin.")
                 .append('\n')
-                .append("&7/bukkitjavagradle version &r> &eChecks for update.")
+                .append("&7/bukkittemplate version &r> &eChecks for update.")
                 .append('\n')
-                .append("&7/bukkitjavagradle message <player> <message> &r> &eSends the message to the player."))
+                .append("&7/bukkittemplate message <player> <message> &r> &eSends the message to the player."))
             .map(ColorUtil::colored)
             .replace(this.getPrefix()));
         m.put("tr", Replaceable.from(
             new StringBuilder()
                 .append("&a====== %prefix% &a======")
                 .append('\n')
-                .append("&7/bukkitjavagradle &r> &eYardım mesajını görüntüler.")
+                .append("&7/bukkittemplate &r> &eYardım mesajını görüntüler.")
                 .append('\n')
-                .append("&7/bukkitjavagradle help &r> &eYardım mesajını görüntüler.")
+                .append("&7/bukkittemplate help &r> &eYardım mesajını görüntüler.")
                 .append('\n')
-                .append("&7/bukkitjavagradle reload &r> &eEklentiyi yeniden başlatır.")
+                .append("&7/bukkittemplate reload &r> &eEklentiyi yeniden başlatır.")
                 .append('\n')
-                .append("&7/bukkitjavagradle version &r> &eGüncellemeleri kontrol eder.")
+                .append("&7/bukkittemplate version &r> &eGüncellemeleri kontrol eder.")
                 .append('\n')
-                .append("&7/bukkitjavagradle message <oyuncu> <mesaj> &r> &eMesajı oyuncuya gönderir."))
+                .append("&7/bukkittemplate message <oyuncu> <mesaj> &r> &eMesajı oyuncuya gönderir."))
             .map(ColorUtil::colored)
             .replace(this.getPrefix()));
     });
@@ -91,7 +91,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
     }
 
     @Section("error")
-    public class Error extends BukkitSection {
+    public final class Error extends BukkitSection {
 
         @Property
         public Scalar<RpString> player_not_found = LanguageFile.this.match(m -> {
@@ -108,7 +108,7 @@ public final class LanguageFile extends BukkitLinkedManaged {
     }
 
     @Section("general")
-    public class General extends BukkitSection {
+    public final class General extends BukkitSection {
 
         @Property
         public Scalar<RpString> reload_complete = LanguageFile.this.match(m -> {

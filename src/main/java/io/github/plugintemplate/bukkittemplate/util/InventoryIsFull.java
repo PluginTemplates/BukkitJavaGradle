@@ -1,4 +1,4 @@
-package io.github.plugintemplate.bukkitjavagradle.util;
+package io.github.plugintemplate.bukkittemplate.util;
 
 import java.util.Map;
 import java.util.function.Predicate;

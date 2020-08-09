@@ -1,10 +1,10 @@
-package io.github.plugintemplate.bukkitjavagradle.file;
+package io.github.plugintemplate.bukkittemplate.file;
 
 import co.aikar.idb.DB;
 import co.aikar.idb.DatabaseOptions;
 import co.aikar.idb.HikariPooledDatabase;
 import co.aikar.idb.PooledDatabaseOptions;
-import io.github.plugintemplate.bukkitjavagradle.hooks.*;
+import io.github.plugintemplate.bukkittemplate.hooks.*;
 import io.github.portlek.configs.annotations.Config;
 import io.github.portlek.configs.annotations.Instance;
 import io.github.portlek.configs.annotations.Property;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
     name = "config",
     type = YamlFileType.class,
     // TODO: Change the plugin data folder as you want.
-    location = "%basedir%/BukkitJavaGradle"
+    location = "%basedir%/BukkitTemplate"
 )
 public final class ConfigFile extends BukkitManaged {
 
@@ -50,7 +50,7 @@ public final class ConfigFile extends BukkitManaged {
 
     // TODO: Change the plugin prefix as you want.
     @Property
-    public RpString plugin_prefix = Replaceable.from("&6[&eBukkitJavaGradle&6]")
+    public RpString plugin_prefix = Replaceable.from("&6[&eBukkitTemplate&6]")
         .map(ColorUtil::colored);
 
     @Property
@@ -73,8 +73,8 @@ public final class ConfigFile extends BukkitManaged {
                 .builder()
                 .options(DatabaseOptions
                     .builder()
-                    .poolName("KekoRank DB")
-                    .logger(Logger.getLogger("KekoRank"))
+                    .poolName("BukkitTemplate DB")
+                    .logger(Logger.getLogger("BukkitTemplate"))
                     .mysql(this.saving.mysql.username, this.saving.mysql.password, this.saving.mysql.database,
                         this.saving.mysql.host + ':' + this.saving.mysql.port)
                     .useOptimizations(true)
@@ -85,9 +85,9 @@ public final class ConfigFile extends BukkitManaged {
                 .builder()
                 .options(DatabaseOptions
                     .builder()
-                    .poolName("KekoRank DB")
-                    .logger(Logger.getLogger("KekoRank"))
-                    .sqlite("plugins/KekoRank/kekorank.db")
+                    .poolName("BukkitTemplate DB")
+                    .logger(Logger.getLogger("BukkitTemplate"))
+                    .sqlite("plugins/BukkitTemplate/bukkitTemplate.db")
                     .useOptimizations(true)
                     .build())
                 .build();
