@@ -74,7 +74,7 @@ public final class BukkitJavaGradle extends JavaPlugin {
             }
             final String name = value[arg];
             if (context.hasConfig("arg") && Bukkit.getPlayer(name) == null) {
-                throw new ConditionFailedException(api.languageFile.errors.player_not_found
+                throw new ConditionFailedException(api.languageFile.errors.player_not_found.get()
                     .build("%player_name%", () -> name));
             }
         });
