@@ -1,8 +1,8 @@
 package io.github.plugintemplate.bukkitjavagradle.util;
 
+import io.github.portlek.configs.CfgSection;
+import io.github.portlek.configs.Provided;
 import io.github.portlek.configs.bukkit.BkktSection;
-import io.github.portlek.configs.provided.Provided;
-import io.github.portlek.configs.structure.section.CfgSection;
 import io.github.portlek.smartinventory.Icon;
 import io.github.portlek.smartinventory.InventoryContents;
 import io.github.portlek.smartinventory.event.abs.ClickEvent;
@@ -40,7 +40,7 @@ public final class FileElement {
 
     @NotNull
     public Icon clickableItem(@NotNull final Consumer<ClickEvent> consumer) {
-        return Icon.from(this.itemStack).whenclick(consumer);
+        return Icon.from(this.itemStack).whenClick(consumer);
     }
 
     public void fill(@NotNull final InventoryContents contents) {

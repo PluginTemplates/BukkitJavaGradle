@@ -1,10 +1,10 @@
 package io.github.plugintemplate.bukkitjavagradle;
 
+import co.aikar.idb.DB;
 import io.github.plugintemplate.bukkitjavagradle.file.ConfigFile;
 import io.github.plugintemplate.bukkitjavagradle.file.LanguageFile;
 import io.github.plugintemplate.bukkitjavagradle.util.ListenerBasic;
 import io.github.plugintemplate.bukkitjavagradle.util.UpdateChecker;
-import io.github.portlek.database.SQL;
 import io.github.portlek.smartinventory.SmartInventory;
 import io.github.portlek.smartinventory.manager.BasicSmartInventory;
 import org.bukkit.command.CommandSender;
@@ -21,25 +21,20 @@ public final class BukkitJavaGradleAPI {
     public final BukkitJavaGradle bukkitJavaGradle;
 
     @NotNull
-    public final ConfigFile configFile;
+    public final ConfigFile configFile = new ConfigFile();
 
     @NotNull
-    public final LanguageFile languageFile;
-
-    @NotNull
-    public SQL sql;
+    public final LanguageFile languageFile = new LanguageFile(this.configFile);
 
     public BukkitJavaGradleAPI(@NotNull final BukkitJavaGradle bukkitJavaGradle) {
         this.inventoryManager = new BasicSmartInventory(bukkitJavaGradle);
         this.bukkitJavaGradle = bukkitJavaGradle;
-        this.configFile = new ConfigFile();
-        this.languageFile = new LanguageFile(this.configFile);
-        this.sql = this.configFile.createSQL();
     }
 
     public void reloadPlugin(final boolean first) {
         this.languageFile.load();
         this.configFile.load();
+        this.configFile.createSQL();
 
         if (first) {
             this.inventoryManager.init();
@@ -49,8 +44,6 @@ public final class BukkitJavaGradleAPI {
                 event -> this.checkForUpdate(event.getPlayer())
             ).register(this.bukkitJavaGradle);
             // TODO: Listeners should be here.
-        } else {
-            this.sql = this.configFile.createSQL();
         }
 
         this.bukkitJavaGradle.getServer().getScheduler().cancelTasks(this.bukkitJavaGradle);
@@ -78,10 +71,10 @@ public final class BukkitJavaGradleAPI {
 
         try {
             if (updater.checkForUpdates()) {
-                sender.sendMessage(this.languageFile.generals.new_version_found
+                sender.sendMessage(this.languageFile.generals.new_version_found.get()
                     .build("%version%", updater::getLatestVersion));
             } else {
-                sender.sendMessage(this.languageFile.generals.latest_version
+                sender.sendMessage(this.languageFile.generals.latest_version.get()
                     .build("%version%", updater::getLatestVersion));
             }
         } catch (final Exception exception) {
@@ -93,8 +86,7 @@ public final class BukkitJavaGradleAPI {
         if (this.configFile.saving.save_when_plugin_disable) {
             // TODO Add codes for saving data
         }
-
-        this.sql.getDatabase().disconnect();
+        DB.close();
     }
 
 }

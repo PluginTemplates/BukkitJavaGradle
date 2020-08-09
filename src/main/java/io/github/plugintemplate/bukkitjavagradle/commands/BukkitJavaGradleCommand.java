@@ -16,7 +16,7 @@ public final class BukkitJavaGradleCommand extends BaseCommand {
     // TODO Change the permission as you want.
     @CommandPermission("bukkitjavagradle.command.main")
     public void defaultCommand(final CommandSender sender) {
-        sender.sendMessage(BukkitJavaGradle.getAPI().languageFile.help_messages.build());
+        sender.sendMessage(BukkitJavaGradle.getAPI().languageFile.help_messages.get().build());
     }
 
     @Subcommand("help")
@@ -32,7 +32,7 @@ public final class BukkitJavaGradleCommand extends BaseCommand {
     public void reloadCommand(final CommandSender sender) {
         final long millis = System.currentTimeMillis();
         BukkitJavaGradle.getAPI().reloadPlugin(false);
-        sender.sendMessage(BukkitJavaGradle.getAPI().languageFile.generals.reload_complete
+        sender.sendMessage(BukkitJavaGradle.getAPI().languageFile.generals.reload_complete.get()
             .build("%ms%", () -> String.valueOf(System.currentTimeMillis() - millis)));
     }
 

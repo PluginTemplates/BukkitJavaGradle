@@ -30,9 +30,16 @@ repositories {
 dependencies {
     // Tools
     implementation("co.aikar:acf-bukkit:0.5.0-SNAPSHOT")
-    implementation("io.github.portlek:database:1.1")
-    implementation("io.github.portlek:configs-bukkit:4.8.6")
+    implementation("io.github.portlek:configs-core:4.8.7")
+    implementation("io.github.portlek:configs-bukkit:4.8.7")
+    implementation("io.github.portlek:configs-yaml:4.8.7")
+    implementation("io.github.portlek:configs-json:4.8.7")
     implementation("io.github.portlek:SmartInventory:2.5.2")
+    implementation("io.github.portlek:BukkitItemBuilder:1.6.7")
+    implementation("io.github.portlek:bukkit-location:1.0")
+    implementation("io.github.bananapuncher714:NBTEditor:7.16")
+    implementation("co.aikar:idb-bukkit:1.0.0-SNAPSHOT")
+    implementation("com.zaxxer:HikariCP:3.4.5")
 
     // Other Stuffs
     compileOnly("org.jetbrains:annotations:19.0.0")
@@ -51,9 +58,11 @@ dependencies {
 }
 
 shadowJar {
+    // Change the "bukkitjavagradle" case.
     relocate('co.aikar.commands', this.group + ".bukkitjavagradle.commands")
-    // Change the bukkitjavagradle.file case.
     relocate('io.github.portlek.configs', this.group + ".bukkitjavagradle.file")
+    relocate('org.simpleyaml', this.group + ".bukkitjavagradle.simpleyaml")
+    relocate('co.aikar.idb', this.group + ".bukkitjavagradle.db")
     minimize()
     setArchivesBaseName(this.name)
     archiveClassifier.set("")

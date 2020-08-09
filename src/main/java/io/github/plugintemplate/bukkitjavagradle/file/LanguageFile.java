@@ -4,19 +4,21 @@ import io.github.portlek.configs.annotations.*;
 import io.github.portlek.configs.bukkit.BukkitLinkedManaged;
 import io.github.portlek.configs.bukkit.BukkitSection;
 import io.github.portlek.configs.bukkit.util.ColorUtil;
-import io.github.portlek.configs.replaceable.Replaceable;
-import io.github.portlek.configs.replaceable.ReplaceableString;
-import io.github.portlek.configs.util.MapEntry;
+import io.github.portlek.configs.type.YamlFileType;
+import io.github.portlek.configs.util.Scalar;
+import io.github.portlek.mapentry.MapEntry;
+import io.github.portlek.replaceable.Replaceable;
+import io.github.portlek.replaceable.rp.RpString;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
 
-@LinkedConfig(value = {
+@LinkedConfig({
     @LinkedFile(
         key = "en",
         config = @Config(
-            value = "en_US",
+            name = "en_US",
+            type = YamlFileType.class,
             // TODO: Change the plugin data folder as you want.
             location = "%basedir%/BukkitJavaGradle/languages"
         )
@@ -24,7 +26,8 @@ import org.jetbrains.annotations.NotNull;
     @LinkedFile(
         key = "tr",
         config = @Config(
-            value = "tr_TR",
+            name = "tr_TR",
+            type = YamlFileType.class,
             // TODO: Change the plugin data folder as you want.
             location = "%basedir%/BukkitJavaGradle/languages"
         )
@@ -39,44 +42,37 @@ public final class LanguageFile extends BukkitLinkedManaged {
     public LanguageFile.General generals = new General();
 
     @Property
-    public ReplaceableString help_messages = this.match(s -> {
-        if ("en".equals(s)) {
-            return Optional.of(
-                Replaceable.from(
-                    new StringBuilder()
-                        .append("&a====== %prefix% &a======")
-                        .append('\n')
-                        .append("&7/bukkitjavagradle &r> &eShows help message.")
-                        .append('\n')
-                        .append("&7/bukkitjavagradle help &r> &eShows help message.")
-                        .append('\n')
-                        .append("&7/bukkitjavagradle reload &r> &eReloads the plugin.")
-                        .append('\n')
-                        .append("&7/bukkitjavagradle version &r> &eChecks for update.")
-                        .append('\n')
-                        .append("&7/bukkitjavagradle message <player> <message> &r> &eSends the message to the player."))
-                    .map(ColorUtil::colored)
-                    .replace(this.getPrefix()));
-        }
-        if ("tr".equals(s)) {
-            return Optional.of(
-                Replaceable.from(
-                    new StringBuilder()
-                        .append("&a====== %prefix% &a======")
-                        .append('\n')
-                        .append("&7/bukkitjavagradle &r> &eYardım mesajını görüntüler.")
-                        .append('\n')
-                        .append("&7/bukkitjavagradle help &r> &eYardım mesajını görüntüler.")
-                        .append('\n')
-                        .append("&7/bukkitjavagradle reload &r> &eEklentiyi yeniden başlatır.")
-                        .append('\n')
-                        .append("&7/bukkitjavagradle version &r> &eGüncellemeleri kontrol eder.")
-                        .append('\n')
-                        .append("&7/bukkitjavagradle message <oyuncu> <mesaj> &r> &eMesajı oyuncuya gönderir."))
-                    .map(ColorUtil::colored)
-                    .replace(this.getPrefix()));
-        }
-        return Optional.empty();
+    public Scalar<RpString> help_messages = this.match(m -> {
+        m.put("en", Replaceable.from(
+            new StringBuilder()
+                .append("&a====== %prefix% &a======")
+                .append('\n')
+                .append("&7/bukkitjavagradle &r> &eShows help message.")
+                .append('\n')
+                .append("&7/bukkitjavagradle help &r> &eShows help message.")
+                .append('\n')
+                .append("&7/bukkitjavagradle reload &r> &eReloads the plugin.")
+                .append('\n')
+                .append("&7/bukkitjavagradle version &r> &eChecks for update.")
+                .append('\n')
+                .append("&7/bukkitjavagradle message <player> <message> &r> &eSends the message to the player."))
+            .map(ColorUtil::colored)
+            .replace(this.getPrefix()));
+        m.put("tr", Replaceable.from(
+            new StringBuilder()
+                .append("&a====== %prefix% &a======")
+                .append('\n')
+                .append("&7/bukkitjavagradle &r> &eYardım mesajını görüntüler.")
+                .append('\n')
+                .append("&7/bukkitjavagradle help &r> &eYardım mesajını görüntüler.")
+                .append('\n')
+                .append("&7/bukkitjavagradle reload &r> &eEklentiyi yeniden başlatır.")
+                .append('\n')
+                .append("&7/bukkitjavagradle version &r> &eGüncellemeleri kontrol eder.")
+                .append('\n')
+                .append("&7/bukkitjavagradle message <oyuncu> <mesaj> &r> &eMesajı oyuncuya gönderir."))
+            .map(ColorUtil::colored)
+            .replace(this.getPrefix()));
     });
 
     public LanguageFile(@NotNull final ConfigFile configFile) {
@@ -98,22 +94,15 @@ public final class LanguageFile extends BukkitLinkedManaged {
     public class Error extends BukkitSection {
 
         @Property
-        public ReplaceableString player_not_found = LanguageFile.this.match(s -> {
-            if ("en".equals(s)) {
-                return Optional.of(
-                    Replaceable.from("%prefix% &cPlayer not found! (%player%)")
-                        .map(ColorUtil::colored)
-                        .replaces("%player%")
-                        .replace(LanguageFile.this.getPrefix()));
-            }
-            if ("tr".equals(s)) {
-                return Optional.of(
-                    Replaceable.from("%prefix% &cOyuncu bulunamadı! (%player%)")
-                        .map(ColorUtil::colored)
-                        .replaces("%player%")
-                        .replace(LanguageFile.this.getPrefix()));
-            }
-            return Optional.empty();
+        public Scalar<RpString> player_not_found = LanguageFile.this.match(m -> {
+            m.put("en", Replaceable.from("%prefix% &cPlayer not found! (%player%)")
+                .map(ColorUtil::colored)
+                .replaces("%player%")
+                .replace(LanguageFile.this.getPrefix()));
+            m.put("tr", Replaceable.from("%prefix% &cOyuncu bulunamadı! (%player%)")
+                .map(ColorUtil::colored)
+                .replaces("%player%")
+                .replace(LanguageFile.this.getPrefix()));
         });
 
     }
@@ -122,66 +111,40 @@ public final class LanguageFile extends BukkitLinkedManaged {
     public class General extends BukkitSection {
 
         @Property
-        public ReplaceableString reload_complete = LanguageFile.this.match(s -> {
-            if ("en".equals(s)) {
-                return Optional.of(
-                    Replaceable.from("%prefix% &aReload complete! &7Took (%ms%ms)")
-                        .map(ColorUtil::colored)
-                        .replace(LanguageFile.this.getPrefix())
-                        .replaces("%ms%")
-                );
-            }
-            if ("tr".equals(s)) {
-                return Optional.of(
-                    Replaceable.from("%prefix% &aYeniden yükleme tamamlandı! &7Took (%ms%ms)")
-                        .map(ColorUtil::colored)
-                        .replace(LanguageFile.this.getPrefix())
-                        .replaces("%ms%")
-                );
-            }
-            return Optional.empty();
+        public Scalar<RpString> reload_complete = LanguageFile.this.match(m -> {
+            m.put("en", Replaceable.from("%prefix% &aReload complete! &7Took (%ms%ms)")
+                .map(ColorUtil::colored)
+                .replace(LanguageFile.this.getPrefix())
+                .replaces("%ms%"));
+            m.put("tr", Replaceable.from("%prefix% &aYeniden yükleme tamamlandı! &7Took (%ms%ms)")
+                .map(ColorUtil::colored)
+                .replace(LanguageFile.this.getPrefix())
+                .replaces("%ms%"));
         });
 
         @Property
-        public ReplaceableString new_version_found = LanguageFile.this.match(s -> {
-            if ("en".equals(s)) {
-                return Optional.of(
-                    Replaceable.from("%prefix% &eNew version found (v%version%)")
-                        .map(ColorUtil::colored)
-                        .replaces("%version%")
-                        .replace(LanguageFile.this.getPrefix())
-                );
-            }
-            if ("tr".equals(s)) {
-                return Optional.of(
-                    Replaceable.from("%prefix% &eYeni sürüm bulundu (v%version%)")
-                        .map(ColorUtil::colored)
-                        .replaces("%version%")
-                        .replace(LanguageFile.this.getPrefix())
-                );
-            }
-            return Optional.empty();
+        public Scalar<RpString> new_version_found = LanguageFile.this.match(m -> {
+            m.put("en", Replaceable.from("%prefix% &eNew version found (v%version%)")
+                .map(ColorUtil::colored)
+                .replaces("%version%")
+                .replace(LanguageFile.this.getPrefix()));
+            m.put("tr", Replaceable.from("%prefix% &eYeni sürüm bulundu (v%version%)")
+                .map(ColorUtil::colored)
+                .replaces("%version%")
+                .replace(LanguageFile.this.getPrefix()));
         });
 
         @Property
-        public ReplaceableString latest_version = LanguageFile.this.match(s -> {
-            if ("en".equals(s)) {
-                return Optional.of(
-                    Replaceable.from("%prefix% &aYou're using the latest version (v%version%)")
-                        .map(ColorUtil::colored)
-                        .replaces("%version%")
-                        .replace(LanguageFile.this.getPrefix())
-                );
-            }
-            if ("tr".equals(s)) {
-                return Optional.of(
-                    Replaceable.from("%prefix% &aSon sürümü kullanıyorsunuz (v%version%)")
-                        .map(ColorUtil::colored)
-                        .replaces("%version%")
-                        .replace(LanguageFile.this.getPrefix())
-                );
-            }
-            return Optional.empty();
+        public Scalar<RpString> latest_version = LanguageFile.this.match(m -> {
+            m.put("en", Replaceable.from("%prefix% &aYou're using the latest version (v%version%)")
+                .map(ColorUtil::colored)
+                .replaces("%version%")
+                .replace(LanguageFile.this.getPrefix()));
+            m.put("tr", Replaceable.from("%prefix% &aSon sürümü kullanıyorsunuz (v%version%)")
+                .map(ColorUtil::colored)
+                .replaces("%version%")
+                .replace(LanguageFile.this.getPrefix())
+            );
         });
 
     }

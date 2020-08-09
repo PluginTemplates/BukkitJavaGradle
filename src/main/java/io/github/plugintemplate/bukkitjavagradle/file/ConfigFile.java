@@ -1,6 +1,9 @@
 package io.github.plugintemplate.bukkitjavagradle.file;
 
-import io.github.plugintemplate.bukkitjavagradle.BukkitJavaGradle;
+import co.aikar.idb.DB;
+import co.aikar.idb.DatabaseOptions;
+import co.aikar.idb.HikariPooledDatabase;
+import co.aikar.idb.PooledDatabaseOptions;
 import io.github.plugintemplate.bukkitjavagradle.hooks.*;
 import io.github.portlek.configs.annotations.Config;
 import io.github.portlek.configs.annotations.Instance;
@@ -9,23 +12,20 @@ import io.github.portlek.configs.annotations.Section;
 import io.github.portlek.configs.bukkit.BukkitManaged;
 import io.github.portlek.configs.bukkit.BukkitSection;
 import io.github.portlek.configs.bukkit.util.ColorUtil;
-import io.github.portlek.configs.replaceable.Replaceable;
-import io.github.portlek.configs.replaceable.ReplaceableString;
-import io.github.portlek.database.Database;
-import io.github.portlek.database.MapEntry;
-import io.github.portlek.database.SQL;
-import io.github.portlek.database.database.MySQL;
-import io.github.portlek.database.database.SQLite;
-import io.github.portlek.database.sql.SQLBasic;
+import io.github.portlek.configs.type.YamlFileType;
+import io.github.portlek.replaceable.Replaceable;
+import io.github.portlek.replaceable.rp.RpString;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
+import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 @Config(
-    value = "config",
+    name = "config",
+    type = YamlFileType.class,
     // TODO: Change the plugin data folder as you want.
     location = "%basedir%/BukkitJavaGradle"
 )
@@ -50,7 +50,7 @@ public final class ConfigFile extends BukkitManaged {
 
     // TODO: Change the plugin prefix as you want.
     @Property
-    public ReplaceableString plugin_prefix = Replaceable.from("&6[&eBukkitJavaGradle&6]")
+    public RpString plugin_prefix = Replaceable.from("&6[&eBukkitJavaGradle&6]")
         .map(ColorUtil::colored);
 
     @Property
@@ -66,20 +66,33 @@ public final class ConfigFile extends BukkitManaged {
     }
 
     @NotNull
-    public SQL createSQL() {
-        final Database database;
+    public void createSQL() {
+        final PooledDatabaseOptions poolOptions;
         if (this.isMySQL()) {
-            database = new MySQL(
-                this.saving.mysql.host,
-                this.saving.mysql.port,
-                this.saving.mysql.database,
-                this.saving.mysql.username,
-                this.saving.mysql.password
-            );
+            poolOptions = PooledDatabaseOptions
+                .builder()
+                .options(DatabaseOptions
+                    .builder()
+                    .poolName("KekoRank DB")
+                    .logger(Logger.getLogger("KekoRank"))
+                    .mysql(this.saving.mysql.username, this.saving.mysql.password, this.saving.mysql.database,
+                        this.saving.mysql.host + ':' + this.saving.mysql.port)
+                    .useOptimizations(true)
+                    .build())
+                .build();
         } else {
-            database = new SQLite(BukkitJavaGradle.getInstance(), "bukkitjavagradle.db");
+            poolOptions = PooledDatabaseOptions
+                .builder()
+                .options(DatabaseOptions
+                    .builder()
+                    .poolName("KekoRank DB")
+                    .logger(Logger.getLogger("KekoRank"))
+                    .sqlite("plugins/KekoRank/kekorank.db")
+                    .useOptimizations(true)
+                    .build())
+                .build();
         }
-        return new SQLBasic(database);
+        DB.setGlobalDatabase(new HikariPooledDatabase(poolOptions));
     }
 
     @NotNull
@@ -89,9 +102,9 @@ public final class ConfigFile extends BukkitManaged {
     }
 
     private boolean isMySQL() {
-        return this.saving.storage_type.equalsIgnoreCase("mysql") ||
-            this.saving.storage_type.equalsIgnoreCase("remote") ||
-            this.saving.storage_type.equalsIgnoreCase("net");
+        return "mysql".equalsIgnoreCase(this.saving.storage_type) ||
+            "remote".equalsIgnoreCase(this.saving.storage_type) ||
+            "net".equalsIgnoreCase(this.saving.storage_type);
     }
 
     private void loadWrapped() {
@@ -104,7 +117,6 @@ public final class ConfigFile extends BukkitManaged {
                 this.hooks.LuckPerms = false;
                 this.hooks.set(ConfigFile.LUCK_PERMS, false);
             });
-
         this.hookLittle(this.hooks.PlaceholderAPI, new PlaceholderAPIHook(), ConfigFile.PLACEHOLDER_API,
             () -> {
                 this.hooks.PlaceholderAPI = true;
