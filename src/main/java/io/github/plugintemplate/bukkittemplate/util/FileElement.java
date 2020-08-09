@@ -126,7 +126,7 @@ public final class FileElement {
         public void set(@NotNull final FileElement fileElement, @NotNull final CfgSection section, @NotNull final String path) {
             final String dot = GeneralUtilities.putDot(path);
             section.set(dot + "row", fileElement.row());
-            section.set(dot + "column", fileElement.row());
+            section.set(dot + "column", fileElement.column());
             ((BkktSection) section).setItemStack(dot + "item", fileElement.getItemStack());
         }
 
