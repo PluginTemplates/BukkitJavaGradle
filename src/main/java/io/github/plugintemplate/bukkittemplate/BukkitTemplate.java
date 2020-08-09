@@ -6,12 +6,17 @@ import java.util.Optional;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 // TODO Change the class name as you want.
 public final class BukkitTemplate extends JavaPlugin {
 
+    private static final Object LOCK = new Object();
+
+    @Nullable
     private static BukkitTemplateAPI api;
 
+    @Nullable
     private static BukkitTemplate instance;
 
     @NotNull
@@ -24,7 +29,7 @@ public final class BukkitTemplate extends JavaPlugin {
         if (Optional.ofNullable(BukkitTemplate.instance).isPresent()) {
             throw new IllegalStateException("You can't use BukkitTemplate#setInstance method twice!");
         }
-        synchronized (this) {
+        synchronized (BukkitTemplate.LOCK) {
             BukkitTemplate.instance = instance;
         }
     }
@@ -39,7 +44,7 @@ public final class BukkitTemplate extends JavaPlugin {
         if (Optional.ofNullable(BukkitTemplate.api).isPresent()) {
             throw new IllegalStateException("You can't use BukkitTemplate#setAPI method twice!");
         }
-        synchronized (this) {
+        synchronized (BukkitTemplate.LOCK) {
             BukkitTemplate.api = loader;
         }
     }
@@ -47,6 +52,7 @@ public final class BukkitTemplate extends JavaPlugin {
     @Override
     public void onLoad() {
         this.setInstance(this);
+        this.setAPI(new BukkitTemplateAPI(this));
     }
 
     @Override
@@ -56,11 +62,9 @@ public final class BukkitTemplate extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        final BukkitTemplateAPI api = new BukkitTemplateAPI(this);
-        this.setAPI(api);
         this.getServer().getScheduler().runTask(this, () ->
             this.getServer().getScheduler().runTaskAsynchronously(this, () ->
-                api.reloadPlugin(true)));
+                BukkitTemplate.getAPI().reloadPlugin(true)));
         final BukkitCommandManager manager = new BukkitCommandManager(this);
         final CommandConditions<BukkitCommandIssuer, BukkitCommandExecutionContext, BukkitConditionContext> conditions =
             manager.getCommandConditions();
@@ -74,7 +78,7 @@ public final class BukkitTemplate extends JavaPlugin {
             }
             final String name = value[arg];
             if (context.hasConfig("arg") && Bukkit.getPlayer(name) == null) {
-                throw new ConditionFailedException(api.languageFile.errors.player_not_found.get()
+                throw new ConditionFailedException(BukkitTemplate.api.languageFile.errors.player_not_found.get()
                     .build("%player_name%", () -> name));
             }
         });
