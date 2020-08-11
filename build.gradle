@@ -43,7 +43,6 @@ dependencies {
     implementation("io.github.bananapuncher714:NBTEditor:7.16")
     implementation("co.aikar:idb-bukkit:1.0.0-SNAPSHOT")
     implementation("com.zaxxer:HikariCP:3.4.5")
-    implementation("co.aikar:taskchain-bukkit:3.7.2")
 
     // Other Stuffs
     compileOnly("org.jetbrains:annotations:20.0.0")
@@ -67,7 +66,6 @@ shadowJar {
     relocate('io.github.portlek.configs', this.group + ".bukkittemplate.file")
     relocate('org.simpleyaml', this.group + ".bukkittemplate.simpleyaml")
     relocate('co.aikar.idb', this.group + ".bukkittemplate.db")
-    relocate('co.aikar.taskchain', this.group + ".bukkittemplate.task")
     minimize()
     setArchivesBaseName(this.name)
     archiveClassifier.set("")
