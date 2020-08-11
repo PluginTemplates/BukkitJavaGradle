@@ -35,7 +35,7 @@ dependencies {
     implementation("co.aikar:acf-bukkit:0.5.0-SNAPSHOT")
     implementation("io.github.portlek:configs-core:4.9.1")
     implementation("io.github.portlek:configs-bukkit:4.8.7")
-    implementation("io.github.portlek:configs-yaml:4.8.7")
+    implementation("io.github.portlek:configs-yaml:4.9.1")
     implementation("io.github.portlek:configs-json:4.8.7")
     implementation("io.github.portlek:SmartInventory:2.5.2")
     implementation("io.github.portlek:BukkitItemBuilder:1.6.7")
