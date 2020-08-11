@@ -1,6 +1,9 @@
 package io.github.plugintemplate.bukkittemplate;
 
 import co.aikar.commands.*;
+import co.aikar.taskchain.BukkitTaskChainFactory;
+import co.aikar.taskchain.TaskChain;
+import co.aikar.taskchain.TaskChainFactory;
 import io.github.plugintemplate.bukkittemplate.commands.BukkitTemplateCommand;
 import java.util.Optional;
 import org.bukkit.Bukkit;
@@ -18,6 +21,9 @@ public final class BukkitTemplate extends JavaPlugin {
 
     @Nullable
     private static BukkitTemplate instance;
+
+    @Nullable
+    private TaskChainFactory taskChainFactory;
 
     @NotNull
     public static BukkitTemplate getInstance() {
@@ -49,10 +55,27 @@ public final class BukkitTemplate extends JavaPlugin {
         }
     }
 
+    @NotNull
+    public <T> TaskChain<T> newChain() {
+        return Optional.ofNullable(this.taskChainFactory)
+            .map(TaskChainFactory::<T>newChain)
+            .orElseThrow(() ->
+                new RuntimeException("The plugin couldn't load correctly!"));
+    }
+
+    @NotNull
+    public <T> TaskChain<T> newSharedChain(final String name) {
+        return Optional.ofNullable(this.taskChainFactory)
+            .map(task -> task.<T>newSharedChain(name))
+            .orElseThrow(() ->
+                new RuntimeException("The plugin couldn't load correctly!"));
+    }
+
     @Override
     public void onLoad() {
         this.setInstance(this);
         this.setAPI(new BukkitTemplateAPI(this));
+        this.taskChainFactory = BukkitTaskChainFactory.create(this);
     }
 
     @Override
