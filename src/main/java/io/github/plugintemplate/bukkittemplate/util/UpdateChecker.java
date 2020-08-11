@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
+@AllArgsConstructor
 public final class UpdateChecker {
 
     @NotNull
@@ -19,18 +22,12 @@ public final class UpdateChecker {
     private final String checkURL;
 
     @NotNull
+    @Getter
     private String newVersion;
 
     public UpdateChecker(@NotNull final Plugin plugin, final int projectID) {
-        this.plugin = plugin;
-        this.newVersion = plugin.getDescription().getVersion();
-        this.project = projectID;
-        this.checkURL = "https://api.spigotmc.org/legacy/update.php?resource=" + projectID;
-    }
-
-    @NotNull
-    public String getLatestVersion() {
-        return this.newVersion;
+        this(plugin, projectID, "https://api.spigotmc.org/legacy/update.php?resource=" + projectID,
+            plugin.getDescription().getVersion());
     }
 
     @NotNull

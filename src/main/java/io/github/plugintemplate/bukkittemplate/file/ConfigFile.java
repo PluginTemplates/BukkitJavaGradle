@@ -179,7 +179,7 @@ public final class ConfigFile extends BukkitManaged {
         public boolean auto_save = true;
 
         @Property
-        public int auto_save_time = 60;
+        public long auto_save_time = 60L;
 
         @Section("mysql")
         public static final class MySQL extends BukkitSection {

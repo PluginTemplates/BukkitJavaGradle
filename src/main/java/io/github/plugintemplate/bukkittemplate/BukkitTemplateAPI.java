@@ -75,10 +75,10 @@ public final class BukkitTemplateAPI {
         try {
             if (updater.checkForUpdates()) {
                 sender.sendMessage(this.languageFile.generals.new_version_found.get()
-                    .build("%version%", updater::getLatestVersion));
+                    .build("%version%", updater::getNewVersion));
             } else {
                 sender.sendMessage(this.languageFile.generals.latest_version.get()
-                    .build("%version%", updater::getLatestVersion));
+                    .build("%version%", updater::getNewVersion));
             }
         } catch (final Exception exception) {
             this.bukkitTemplate.getLogger().warning("Update checker failed, could not connect to the API.");
