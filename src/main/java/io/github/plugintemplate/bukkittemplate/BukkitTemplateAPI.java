@@ -43,7 +43,7 @@ public final class BukkitTemplateAPI {
             this.inventoryManager.init();
             new ListenerBasic<>(
                 PlayerJoinEvent.class,
-                event -> event.getPlayer().hasPermission("bukkitjavagradle.version"),
+                event -> event.getPlayer().hasPermission("bukkittemplate.version"),
                 event -> this.checkForUpdate(event.getPlayer())
             ).register(this.bukkitTemplate);
             // TODO: Listeners should be here.
