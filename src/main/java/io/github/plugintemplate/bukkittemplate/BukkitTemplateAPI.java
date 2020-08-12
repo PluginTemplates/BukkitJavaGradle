@@ -17,16 +17,16 @@ import org.jetbrains.annotations.NotNull;
 public final class BukkitTemplateAPI {
 
     @NotNull
-    public final SmartInventory inventoryManager;
-
-    @NotNull
-    public final BukkitTemplate bukkitTemplate;
-
-    @NotNull
     public final ConfigFile configFile = new ConfigFile();
 
     @NotNull
     public final LanguageFile languageFile = new LanguageFile(this.configFile);
+
+    @NotNull
+    public final SmartInventory inventoryManager;
+
+    @NotNull
+    public final BukkitTemplate bukkitTemplate;
 
     public BukkitTemplateAPI(@NotNull final BukkitTemplate bukkitTemplate) {
         this.inventoryManager = new BasicSmartInventory(bukkitTemplate);
