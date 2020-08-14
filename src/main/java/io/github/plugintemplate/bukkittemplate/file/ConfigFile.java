@@ -11,7 +11,7 @@ import io.github.portlek.configs.annotations.Property;
 import io.github.portlek.configs.annotations.Section;
 import io.github.portlek.configs.bukkit.BukkitManaged;
 import io.github.portlek.configs.bukkit.BukkitSection;
-import io.github.portlek.configs.bukkit.util.ColorUtil;
+import io.github.portlek.bukkititembuilder.util.ColorUtil;
 import io.github.portlek.configs.type.YamlFileType;
 import io.github.portlek.replaceable.Replaceable;
 import io.github.portlek.replaceable.rp.RpString;
