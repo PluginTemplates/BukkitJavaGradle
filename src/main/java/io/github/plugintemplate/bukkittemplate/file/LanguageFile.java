@@ -3,7 +3,7 @@ package io.github.plugintemplate.bukkittemplate.file;
 import io.github.portlek.configs.annotations.*;
 import io.github.portlek.configs.bukkit.BukkitLinkedManaged;
 import io.github.portlek.configs.bukkit.BukkitSection;
-import io.github.portlek.configs.bukkit.util.ColorUtil;
+import io.github.portlek.bukkititembuilder.util.ColorUtil;
 import io.github.portlek.configs.type.YamlFileType;
 import io.github.portlek.configs.util.Scalar;
 import io.github.portlek.mapentry.MapEntry;
