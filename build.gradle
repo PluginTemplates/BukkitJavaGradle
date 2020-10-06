@@ -35,7 +35,7 @@ repositories {
 dependencies {
     // Tools
     implementation("co.aikar:acf-bukkit:0.5.0-SNAPSHOT")
-    implementation("io.github.portlek:configs-core:4.9.9.5")
+    implementation("io.github.portlek:configs-core:4.9.9.6")
     implementation("io.github.portlek:configs-bukkit:4.9.9.5")
     implementation("io.github.portlek:configs-yaml:4.9.9.5")
     implementation("io.github.portlek:configs-json:4.9.9.5")
