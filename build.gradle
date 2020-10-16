@@ -48,8 +48,8 @@ dependencies {
 
     // Other Stuffs
     compileOnly("org.jetbrains:annotations:20.1.0")
-    compileOnly("org.projectlombok:lombok:1.18.14")
-    annotationProcessor("org.projectlombok:lombok:1.18.12")
+    compileOnly("org.projectlombok:lombok:1.18.16")
+    annotationProcessor("org.projectlombok:lombok:1.18.16")
 
     // Main
     compileOnly spigot()
