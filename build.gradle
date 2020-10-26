@@ -39,7 +39,7 @@ dependencies {
     implementation("io.github.portlek:configs-bukkit:4.9.9.6")
     implementation("io.github.portlek:configs-yaml:4.9.9.6")
     implementation("io.github.portlek:configs-json:4.9.9.6")
-    implementation("io.github.portlek:SmartInventory:2.7.7")
+    implementation("io.github.portlek:SmartInventory:3.0.0")
     implementation("io.github.portlek:BukkitItemBuilder:3.1")
     implementation("io.github.portlek:bukkit-location:2.0.0")
     implementation("io.github.bananapuncher714:NBTEditor:7.16")
