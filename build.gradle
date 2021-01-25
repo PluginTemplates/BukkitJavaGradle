@@ -44,7 +44,7 @@ dependencies {
     implementation("io.github.portlek:bukkit-location:2.0.10")
     implementation("io.github.bananapuncher714:NBTEditor:7.16")
     implementation("co.aikar:idb-bukkit:1.0.0-SNAPSHOT")
-    implementation("com.zaxxer:HikariCP:3.4.5")
+    implementation("com.zaxxer:HikariCP:4.0.0")
 
     // Other Stuffs
     compileOnly("org.jetbrains:annotations:20.1.0")
