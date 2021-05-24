@@ -41,7 +41,7 @@ dependencies {
     implementation("io.github.portlek:configs-json:4.9.9.6")
     implementation("io.github.portlek:SmartInventory:4.1.1")
     implementation("io.github.portlek:BukkitItemBuilder:4.0.1")
-    implementation("io.github.portlek:bukkit-location:2.0.10")
+    implementation("io.github.portlek:bukkit-location:3.0.3")
     implementation("io.github.bananapuncher714:NBTEditor:7.16")
     implementation("co.aikar:idb-bukkit:1.0.0-SNAPSHOT")
     implementation("com.zaxxer:HikariCP:4.0.3")
